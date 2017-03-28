@@ -1,0 +1,147 @@
+#{extends 'standardForm.html' /}
+#{set title:'PrometniDokumenti' /}
+
+<script>
+
+function sync(item){
+	vrstaDokumenta = item.find(".vrstaDokumenta").html()
+    redniBrojDokumenta = item.find(".redniBrojDokumenta").html()
+    datumFormiranja = item.find(".datumFormiranja").html()
+    datumKnjizenja = item.find(".datumKnjizenja").html()
+    status = item.find(".status").html()
+    id = item.find(".id").html()
+    $("#vrstaDokumenta").val(vrstaDokumenta);
+    $("#redniBrojDokumenta").val(redniBrojDokumenta);
+    $("#datumFormiranja").val(datumFormiranja);
+    $("#datumKnjizenja").val(datumKnjizenja);
+    $("#status").val(status);
+    
+    
+    $("#id").val(id);
+
+}
+function remove(id){
+		$(location).attr('href','/PrometniDokumenti/remove?id='+id);
+	}
+		 
+
+ 
+
+
+
+</script>
+
+
+
+<p>
+<ul>
+  <li><a href="@{PrometniDokumenti.show("filter")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+  <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
+  <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
+  <li><a  id = "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+  <li><a  id = "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+  <li><a  id = "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+  <li><a  id = "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+  <li><a href="@{PrometniDokumenti.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+  <li><a href="#" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+  <li><a href="#" id = "nextform"><img src="@{'/public/images/nextform.gif'}"/></a></li>
+</ul>
+</p>
+
+
+<h1>PrometniDokumenti</h1>
+
+<table>
+	<tr class = "header">
+	   <th>vrstaDokumenta</th> 
+	   <th>redniBrojDokumenta</th>
+	   <th>datumFormiranja</th>
+	   <th>datumKnjizenja</th>
+	   <th>status</th>
+	</tr>
+#{list items:prometniDokumenti, as:'prometniDokument'}
+	<tr>
+		<td class = "vrstaDokumenta">${prometniDokument.vrstaDokumenta}</td>
+		<td class = "redniBrojDokumenta">${prometniDokument.redniBrojDokumenta}</td>
+		<td class = "datumFormiranja">${prometniDokument.datumFormiranja}</td>
+		<td class = "datumKnjizenja">${prometniDokument.datumKnjizenja}</td>
+		<td class = "status">${prometniDokument.status}</td>
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${prometniDokument.id}</td>
+	</tr>
+#{/list}
+</table>
+
+
+	
+#{set 'action'}
+				 
+#{if mode == 'add'}
+	@{PrometniDokumenti.add()}
+#{/if}
+				 
+#{elseif mode == 'edit'}
+	@{PrometniDokumenti.edit()}
+#{/elseif}
+				 
+#{else}
+	@{PrometniDokumenti.filter()}
+#{/else}
+#{/set}
+
+
+<div class = "panel">
+	<p>
+		<form action=${action} method="post">
+
+		
+				#{field 'id'}
+					<input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+				#{/}
+				
+				<p>
+				
+				#{field 'vrstaDokumenta'}
+					<label for = "${field.id}">Vrsta Dokumenta</label>
+					<input type = "text" name = "${field.name}" id = "${field.id}"/>
+					<span>#{error 'vrstaDokumenta' /}</span>
+					
+				#{/}
+				</p>
+				<p>
+				#{field 'redniBrojDokumenta'}
+					<label for = "${field.id}">Redni Broj Dokumenta</label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'redniBrojDokumenta' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'datumFormiranja'}
+					<label for = "${field.id}">Datum Formiranja</label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'datumFormiranja' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'datumKnjizenja'}
+					<label for = "${field.id}">Datum Knjizenja</label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'datumKnjizenja' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'status'}
+					<label for = "${field.id}">Status</label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'status' /}</span>
+				#{/}
+				</p>
+				<div id = "formActions">
+					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+					<a href = "@{PrometniDokumenti.show("")}" style="margin-left:1em">Rollback</a>
+				</div>			
+				</form>
+		
+	</p>
+</div>
+

@@ -1,0 +1,104 @@
+#{extends 'standardForm.html' /}
+#{set title:'Robe.html' /}
+
+<script>
+
+function sync(item){
+	nazivRobe = item.find(".nazivRobe").html()
+    id = item.find(".id").html()
+    $("#nazivRobe").val(nazivRobe);
+    
+    
+    $("#id").val(id);
+
+}
+function remove(id){
+		$(location).attr('href','/Robe/remove?id='+id);
+	}
+		 
+
+ 
+
+
+
+</script>
+
+
+
+<p>
+<ul>
+  <li><a href="@{Robe.show("filter")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+  <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
+  <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
+  <li><a  id = "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+  <li><a  id = "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+  <li><a  id = "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+  <li><a  id = "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+  <li><a href="@{Robe.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+  <li><a href="#" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+  <li><a href="#" id = "nextform"><img src="@{'/public/images/nextform.gif'}"/></a></li>
+</ul>
+</p>
+
+
+<h1>Robe</h1>
+
+<table>
+	<tr class = "header">
+	   <th>nazivRobe</th> 
+	</tr>
+#{list items:robe, as:'roba'}
+	<tr>
+		<td class = "nazivRobe">${roba.nazivRobe}</td>
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${roba.id}</td>
+	</tr>
+#{/list}
+</table>
+
+
+	
+#{set 'action'}
+				 
+#{if mode == 'add'}
+	@{Robe.add()}
+#{/if}
+				 
+#{elseif mode == 'edit'}
+	@{Robe.edit()}
+#{/elseif}
+				 
+#{else}
+	@{Robe.filter()}
+#{/else}
+#{/set}
+
+
+<div class = "panel">
+	<p>
+		<form action=${action} method="post">
+
+		
+				#{field 'id'}
+					<input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+				#{/}
+				
+				<p>
+				
+				#{field 'nazivRobe'}
+					<label for = "${field.id}">Naziv Robe</label>
+					<input type = "text" name = "${field.name}" id = "${field.id}"/>
+					<span>#{error 'nazivRobe' /}</span>
+					
+				#{/}
+				</p>
+				
+				<div id = "formActions">
+					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+					<a href = "@{Robe.show("")}" style="margin-left:1em">Rollback</a>
+				</div>			
+				</form>
+		
+	</p>
+</div>
+

@@ -1,0 +1,191 @@
+#{extends 'standardForm.html' /}
+#{set title:'RobneKartice' /}
+
+<script>
+
+function sync(item){
+	cena = item.find(".cena").html()
+    pocStanjeKolicine = item.find(".pocStanjeKolicine").html()
+    pocStanjeVrednosti = item.find(".pocStanjeVrednosti").html()
+    prometUlazaKolicine = item.find(".prometUlazaKolicine").html()
+    prometUlazaVrednosti = item.find(".prometUlazaVrednosti").html()
+    prometIzlazaKolicine = item.find(".prometIzlazaKolicine").html()
+    prometIzlazaVrednosti = item.find(".prometIzlazaVrednosti").html()
+    ukupnaKolicina = item.find(".ukupnaKolicina").html()
+    ukupnaVrednost = item.find(".ukupnaVrednost").html()
+    id = item.find(".id").html()
+    $("#cena").val(cena);
+    $("#pocStanjeKolicine").val(pocStanjeKolicine);
+    $("#pocStanjeVrednosti").val(pocStanjeVrednosti);
+    $("#prometUlazaKolicine").val(prometUlazaKolicine);
+    $("#prometUlazaVrednosti").val(prometUlazaVrednosti);
+    $("#prometIzlazaKolicine").val(prometIzlazaKolicine);
+    $("#prometIzlazaVrednosti").val(prometIzlazaVrednosti);
+    $("#ukupnaKolicina").val(ukupnaKolicina);
+    $("#ukupnaVrednost").val(ukupnaVrednost);
+    
+    
+    $("#id").val(id);
+
+}
+function remove(id){
+		$(location).attr('href','/RobneKartice/remove?id='+id);
+	}
+		 
+
+ 
+
+
+
+</script>
+
+
+
+<p>
+<ul>
+  <li><a href="@{RobneKartice.show("filter")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+  <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
+  <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
+  <li><a  id = "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+  <li><a  id = "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+  <li><a  id = "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+  <li><a  id = "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+  <li><a href="@{RobneKartice.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+  <li><a href="#" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+  <li><a href="#" id = "nextform"><img src="@{'/public/images/nextform.gif'}"/></a></li>
+</ul>
+</p>
+
+
+<h1>RobneKartice</h1>
+
+<table>
+	<tr class = "header">
+	   <th>cena</th> 
+	   <th>pocStanjeKolicine</th>
+	   <th>pocStanjeVrednosti</th>
+	   <th>prometUlazaKolicine</th>
+	   <th>prometUlazaVrednosti</th>
+	   <th>prometIzlazaKolicine</th>
+	   <th>prometIzlazaVrednosti</th>
+	   <th>ukupnaKolicina</th>
+	   <th>ukupnaVrednost</th>
+	</tr>
+#{list items:robneKartice, as:'robnaKartica'}
+	<tr>
+		<td class = "cena">${robnaKartica.cena}</td>
+		<td class = "pocStanjeKolicine">${robnaKartica.pocStanjeKolicine}</td>
+		<td class = "pocStanjeVrednosti">${robnaKartica.pocStanjeVrednosti}</td>
+		<td class = "prometUlazaKolicine">${robnaKartica.prometUlazaKolicine}</td>
+		<td class = "prometUlazaVrednosti">${robnaKartica.prometUlazaVrednosti}</td>
+		<td class = "prometIzlazaKolicine">${robnaKartica.prometIzlazaKolicine}</td>
+		<td class = "prometIzlazaVrednosti">${robnaKartica.prometIzlazaVrednosti}</td>
+		<td class = "ukupnaKolicina">${robnaKartica.ukupnaKolicina}</td>
+		<td class = "ukupnaVrednost">${robnaKartica.ukupnaVrednost}</td>
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${robnaKartica.id}</td>
+	</tr>
+#{/list}
+</table>
+
+
+	
+#{set 'action'}
+				 
+#{if mode == 'add'}
+	@{RobneKartice.add()}
+#{/if}
+				 
+#{elseif mode == 'edit'}
+	@{RobneKartice.edit()}
+#{/elseif}
+				 
+#{else}
+	@{RobneKartice.filter()}
+#{/else}
+#{/set}
+
+
+<div class = "panel">
+	<p>
+		<form action=${action} method="post">
+
+		
+				#{field 'id'}
+					<input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+				#{/}
+				
+				<p>
+				
+				#{field 'cena'}
+					<label for = "${field.id}">Cena</label>
+					<input type = "text" name = "${field.name}" id = "${field.id}"/>
+					<span>#{error 'cena' /}</span>
+					
+				#{/}
+				</p>
+				<p>
+				#{field 'pocStanjeKolicine'}
+					<label for = "${field.id}">Pocetno Stanje Kolicine </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'pocStanjeKolicine' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'pocStanjeVrednosti'}
+					<label for = "${field.id}">Pocetno Stanje Vrednosti </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'pocStanjeVrednosti' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'prometUlazaKolicine'}
+					<label for = "${field.id}">Promet Ulaza Kolicine </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'prometUlazaKolicine' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'prometUlazaVrednosti'}
+					<label for = "${field.id}">Promet Ulaza Vrednosti </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'prometUlazaVrednosti' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'prometIzlazaKolicine'}
+					<label for = "${field.id}">Promet Izlaza Kolicine </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'prometIzlazaKolicine' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'prometIzlazaVrednosti'}
+					<label for = "${field.id}">Promet Izlaza Vrednosti </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'prometIzlazaVrednosti' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'ukupnaKolicina'}
+					<label for = "${field.id}">Ukupna Kolicina  </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'ukupnaKolicina' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'ukupnaVrednost'}
+					<label for = "${field.id}">Ukupna Vrednost </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'ukupnaVrednost' /}</span>
+				#{/}
+				</p>
+				<div id = "formActions">
+					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+					<a href = "@{RobneKartice.show("")}" style="margin-left:1em">Rollback</a>
+				</div>			
+				</form>
+		
+	</p>
+</div>
+
