@@ -1,0 +1,135 @@
+#{extends 'standardForm.html' /}
+#{set title:'PoslovniPartneri' /}
+
+<script>
+
+function sync(item){
+	tipPartnera = item.find(".tipPartnera").html()
+    nazivPartnera = item.find(".nazivPartnera").html()
+    pib = item.find(".pib").html()
+    adresa = item.find(".adresa").html()
+    id = item.find(".id").html()
+    $("#tipPartnera").val(tipPartnera);
+    $("#nazivPartnera").val(nazivPartnera);
+    $("#pib").val(pib);
+    $("#adresa").val(adresa);
+    
+    $("#id").val(id);
+
+}
+function remove(id){
+		$(location).attr('href','/PoslovniPartneri/remove?id='+id);
+	}
+		 
+
+ 
+
+
+
+</script>
+
+
+
+<p>
+<ul>
+  <li><a href="@{PoslovniPartneri.show("filter")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+  <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
+  <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
+  <li><a  id = "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+  <li><a  id = "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+  <li><a  id = "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+  <li><a  id = "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+  <li><a href="@{PoslovniPartneri.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+  <li><a href="#" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+  <li><a href="#" id = "nextform"><img src="@{'/public/images/nextform.gif'}"/></a></li>
+</ul>
+</p>
+
+
+<h1>PoslovniPartneri</h1>
+
+<table>
+	<tr class = "header">
+	   <th>tipPartnera</th> 
+	   <th>nazivPartnera</th>
+	   <th>pib</th>
+	   <th>adresa</th>
+	</tr>
+#{list items:poslovniPartneri, as:'poslovniPartner'}
+	<tr>
+		<td class = "tipPartnera">${poslovniPartner.tipPartnera}</td>
+		<td class = "nazivPartnera">${poslovniPartner.nazivPartnera}</td>
+		<td class = "pib">${poslovniPartner.pib}</td>
+		<td class = "adresa">${poslovniPartner.adresa}</td>
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${poslovniPartner.id}</td>
+	</tr>
+#{/list}
+</table>
+
+
+	
+#{set 'action'}
+				 
+#{if mode == 'add'}
+	@{PoslovniPartneri.add()}
+#{/if}
+				 
+#{elseif mode == 'edit'}
+	@{PoslovniPartneri.edit()}
+#{/elseif}
+				 
+#{else}
+	@{PoslovniPartneri.filter()}
+#{/else}
+#{/set}
+
+
+<div class = "panel">
+	<p>
+		<form action=${action} method="post">
+
+		
+				#{field 'id'}
+					<input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+				#{/}
+				
+				<p>
+				
+				#{field 'tipPartnera'}
+					<label for = "${field.id}">Tip Partnera</label>
+					<input type = "text" name = "${field.name}" id = "${field.id}"/>
+					<span>#{error 'tipPartnera' /}</span>
+					
+				#{/}
+				</p>
+				<p>
+				#{field 'nazivPartnera'}
+					<label for = "${field.id}">Naziv Partnera</label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'nazivPartnera' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'pib'}
+					<label for = "${field.id}">PIB</label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'pib' /}</span>
+				#{/}
+				</p>
+				<p>
+				#{field 'adresa'}
+					<label for = "${field.id}">Adresa</label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+					<span>#{error 'adresa' /}</span>
+				#{/}
+				</p>
+				<div id = "formActions">
+					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+					<a href = "@{PoslovniPartneri.show("")}" style="margin-left:1em">Rollback</a>
+				</div>			
+				</form>
+		
+	</p>
+</div>
+
