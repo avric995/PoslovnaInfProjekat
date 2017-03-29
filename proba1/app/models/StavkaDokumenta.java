@@ -17,4 +17,7 @@ public class StavkaDokumenta extends Model {
 	
 	@ManyToOne
 	public PrometniDokument prometniDokument;
+	
+	@ManyToOne
+	public Roba roba;
 }

@@ -11,4 +11,7 @@ public class Roba extends Model {
 	@Column(nullable = false)
 	public String nazivRobe;
 	
+	@OneToMany(mappedBy = "roba")
+	public List<StavkaDokumenta> stavkeDokumenata;
+	
 }
