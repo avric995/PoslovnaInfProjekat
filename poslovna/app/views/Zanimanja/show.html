@@ -1,24 +1,35 @@
 #{extends 'standardForm.html' /}
-#{set title:'Radnici' /}
+#{set title:'Zanimanja' /}
 
 <script>
 
 function sync(item){
-	ime = item.find(".ime").html()
-    prezime = item.find(".prezime").html()
-    sifra = item.find(".sifra").html()
+	oznaka = item.find(".oznaka").html()
+    naziv = item.find(".naziv").html()
     id = item.find(".id").html()
-    $("#ime").val(ime);
-    $("#prezime").val(prezime);
-    $("#sifra").val(sifra);
+    $("#oznaka").val(oznaka);
+    $("#naziv").val(naziv);
     $("#id").val(id);
+
 }
+function remove(id){
+		$(location).attr('href','/Zanimanja/remove?id='+id);
+	}
+		 
+function nextform(id){
+		$(location).attr('href','/radnici/next?id='+id);
+	}
+ 
+
+
 
 </script>
 
+
+
 <p>
 <ul>
-  <li><a href="#" id = "search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="@{Zanimanja.show("search")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
   <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
   <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
   <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
@@ -26,27 +37,25 @@ function sync(item){
   <li><a  id = "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
   <li><a  id = "next"><img src="@{'/public/images/next.gif'}"/></a></li>
   <li><a  id = "last"><img src="@{'/public/images/last.gif'}"/></a></li>
-  <li><a href="#" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+  <li><a href="@{Zanimanja.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
   <li><a href="#" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
   <li><a href="#" id = "nextform"><img src="@{'/public/images/nextform.gif'}"/></a></li>
 </ul>
 </p>
 
 
-<h1>Radnici</h1>
+<h1>Zanimanja</h1>
 
 <table>
 	<tr class = "header">
-	   <th>Ime</th> 
-	   <th>Prezime</th>
-	   <th>Sifra</th>
+	   <th>Oznaka</th> 
+	   <th>Naziv</th>
 	</tr>
-#{list items:radnici, as:'radnik'}
+#{list items:zanimanja, as:'zanimanje'}
 	<tr>
-		<td class = "oznaka">${radnik.ime}</td>
-		<td class = "naziv">${radnik.prezime}</td>
-		<td class = "sifra">${radnik.sifra}</td>
-		<td style = "visibility: hidden; max-width: 0px" class = "id">${radnik.id}</td>
+		<td class = "oznaka">${zanimanje.oznaka}</td>
+		<td class = "naziv">${zanimanje.naziv}</td>
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${zanimanje.id}</td>
 	</tr>
 #{/list}
 </table>
@@ -54,36 +63,45 @@ function sync(item){
 <div class = "panel">
 	<p>
 	
-		#{form @Radnici.show()}
+				 #{set 'action'}
+				 #{if mode == 'add'}
+				 @{Zanimanja.create()}
+				 #{/if}
+				 #{elseif mode == 'edit'}
+				 @{Zanimanja.edit()}
+				 #{/elseif}
+				 #{else}
+				 @{Zanimanja.filter()}
+				 #{/else}
+				 #{/set}
+		<form action=${action} method="post">
+
 		
 				#{field 'id'}
 					<input type = "hidden" name = "${field.name}" id = "${field.id}"/>
 				#{/}
 				
 				<p>
-				#{field 'ime'}
-					<label for = "${field.id}">Ime</label>
+				
+				#{field 'oznaka'}
+					<label for = "${field.id}">Oznaka</label>
 					<input type = "text" name = "${field.name}" id = "${field.id}"/>
+					<span>#{error 'oznaka' /}</span>
+					
 				#{/}
 				</p>
 				<p>
-				#{field 'prezime'}
-					<label for = "${field.id}">Prezime</label>
-					<input type = "text" name = "${field.name}" id = "${field.name}"/>
-				#{/}
-				</p>
-				<p>
-				#{field 'sifra'}
-					<label for = "${field.id}">Sifra</label>
+				#{field 'naziv'}
+					<label for = "${field.id}">Naziv</label>
 					<input type = "text" name = "${field.name}" id = "${field.name}"/>
 				#{/}
 				</p>
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
-					<a href = "#" style="margin-left:1em">Rollback</a>
+					<a href = "@{Zanimanja.show("edit")}" style="margin-left:1em">Rollback</a>
 				</div>			
-				
-		#{/form}
+				</form>
+		
 	</p>
 </div>
 
