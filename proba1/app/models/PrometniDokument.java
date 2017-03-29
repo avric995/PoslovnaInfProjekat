@@ -21,5 +21,16 @@ public class PrometniDokument extends Model {
 	@Column(nullable = true)
 	public String status;
 	
+	@ManyToOne
+	public Magacin magacin;
+	
+	@ManyToOne
+	public PoslovniPartner poslovniPartner;
+	
+	@OneToMany(mappedBy = "prometniDokument")
+	public List<StavkaDokumenta> stavkeDokumenata;
+	
+	
+	
 	
 }

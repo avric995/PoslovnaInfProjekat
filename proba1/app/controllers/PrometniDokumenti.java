@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.List;
 
+import models.Magacin;
+import models.PoslovniPartner;
 import models.PrometniDokument;
 import play.data.validation.Required;
 import play.mvc.*;
@@ -11,13 +13,15 @@ public class PrometniDokumenti extends Controller {
 
 	public static void show(String mode){
     	List<PrometniDokument> prometniDokumenti = PrometniDokument.findAll();
+    	List<Magacin> magacini = Magacin.findAll();
+    	List<PoslovniPartner> poslovniPartneri = PoslovniPartner.findAll();
     	if (mode == null || mode.equals(""))
     		 mode = "edit";
     	
-    	render(prometniDokumenti, mode);
+    	render(prometniDokumenti,magacini,poslovniPartneri, mode);
     }
 	
-	public static void add(@Required String vrstaDokumenta,@Required Integer redniBrojDokumenta,  @Required String datumFormiranja, @Required String datumKnjizenja,@Required String status ) {
+	public static void add(@Required String vrstaDokumenta,@Required Integer redniBrojDokumenta,  @Required String datumFormiranja, @Required String datumKnjizenja,@Required String status, long magacin, long poslovniPartner ) {
 		
 /*		if(validation.hasErrors()) {
 			for(play.data.validation.Error error : validation.errors()) {
@@ -32,11 +36,13 @@ public class PrometniDokumenti extends Controller {
 			prometniDokument.datumFormiranja = datumFormiranja;
 			prometniDokument.datumKnjizenja = datumKnjizenja;
 			prometniDokument.status = status;
+			prometniDokument.magacin = Magacin.findById(magacin);
+			prometniDokument.poslovniPartner = PoslovniPartner.findById(poslovniPartner);
 			prometniDokument.save();
 			validation.keep();
 			show("add");
 	}
-    public static void edit(@Required String vrstaDokumenta,@Required Integer redniBrojDokumenta,  @Required String datumFormiranja, @Required String datumKnjizenja,@Required String status, long id) {
+    public static void edit(@Required String vrstaDokumenta,@Required Integer redniBrojDokumenta,  @Required String datumFormiranja, @Required String datumKnjizenja,@Required String status,long magacin,long poslovniPartner, long id) {
     	PrometniDokument pD = PrometniDokument.findById(id);
     	if(pD!=null){
     	pD.vrstaDokumenta = vrstaDokumenta;
@@ -44,6 +50,8 @@ public class PrometniDokumenti extends Controller {
     	pD.datumFormiranja = datumFormiranja;
     	pD.datumKnjizenja = datumKnjizenja;
     	pD.status = status;
+    	pD.magacin = Magacin.findById(magacin);
+    	pD.poslovniPartner = PoslovniPartner.findById(poslovniPartner);
     	
     	pD.save();
     	}

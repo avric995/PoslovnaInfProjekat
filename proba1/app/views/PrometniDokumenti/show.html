@@ -2,6 +2,20 @@
 #{set title:'PrometniDokumenti' /}
 
 <script>
+$(document).ready(function(){
+	$("#magacinPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#magaciniModal').modal('toggle');
+	});
+});
+$(document).ready(function(){
+	$("#poslovniPartnerPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#poslovniPartneriModal').modal('toggle');
+	});
+});
 
 function sync(item){
 	vrstaDokumenta = item.find(".vrstaDokumenta").html()
@@ -59,6 +73,8 @@ function remove(id){
 	   <th>datumFormiranja</th>
 	   <th>datumKnjizenja</th>
 	   <th>status</th>
+	   <th>Magacin</th>
+	   <th>PoslovniPartner</th>
 	</tr>
 #{list items:prometniDokumenti, as:'prometniDokument'}
 	<tr>
@@ -67,6 +83,8 @@ function remove(id){
 		<td class = "datumFormiranja">${prometniDokument.datumFormiranja}</td>
 		<td class = "datumKnjizenja">${prometniDokument.datumKnjizenja}</td>
 		<td class = "status">${prometniDokument.status}</td>
+		<td class = "magacin">${prometniDokument.magacin}</td>
+		<td class = "poslovniPartner">${prometniDokument.poslovniPartner}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${prometniDokument.id}</td>
 	</tr>
 #{/list}
@@ -136,6 +154,30 @@ function remove(id){
 					<span>#{error 'status' /}</span>
 				#{/}
 				</p>
+				<p>
+				#{field 'magacin'}
+					<label for = "${field.id}">Magacin</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:magacini, as:'magacin'}
+					<option value = "${magacin.id}">${magacin.naziv}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+				#{/}
+				</p>
+				<p>
+				#{field 'poslovniPartner'}
+					<label for = "${field.id}">Poslovni Partner</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:poslovniPartneri, as:'poslovniPartner'}
+					<option value = "${poslovniPartner.id}">${poslovniPartner.nazivPartnera}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+				#{/}
+				</p>
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
 					<a href = "@{PrometniDokumenti.show("")}" style="margin-left:1em">Rollback</a>
@@ -144,4 +186,70 @@ function remove(id){
 		
 	</p>
 </div>
+
+<!-- Modal -->
+  <div class="modal fade" id="magaciniModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Magacini
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>Naziv</th>
+		</tr>
+		#{list items:magacini, as:'magacin'}
+		<tr>
+			<td class = "naziv">${magacin.naziv}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${magacin.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "magacinPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+<!-- Modal 2 -->
+  <div class="modal fade" id="poslovniPartneriModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Poslovni Partneri
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>tipPartnera</th> 
+	   	   <th>nazivPartnera</th>
+	       <th>pib</th>
+	       <th>adresa</th>
+		</tr>
+		#{list items:poslovniPartneri, as:'poslovniPartner'}
+		<tr>
+			<td class = "tipPartnera">${poslovniPartner.tipPartnera}</td>
+			<td class = "nazivPartnera">${poslovniPartner.nazivPartnera}</td>
+			<td class = "pib">${poslovniPartner.pib}</td>
+			<td class = "adresa">${poslovniPartner.adresa}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${magacin.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "poslovniPartnerPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+
 

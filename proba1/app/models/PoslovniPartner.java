@@ -19,18 +19,9 @@ public class PoslovniPartner extends Model {
 	@Column(nullable = true)
 	public String adresa;
 	
-	
-	/*public PoslovniPartner(String tipPartnera, String idPartnera, String nazivPartnera, String pib, String adresa) {
-		super();
-		this.tipPartnera = tipPartnera;
-		this.idPartnera = idPartnera;
-		this.nazivPartnera = nazivPartnera;
-		this.pib = pib;
-		this.adresa = adresa;
-	}*/
-	
-	
+	@OneToMany(mappedBy = "poslovniPartner")
+	public List<PrometniDokument> prometniDokumenti;
 
-
+	
 	
 }

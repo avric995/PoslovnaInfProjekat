@@ -1,0 +1,144 @@
+#{extends 'standardForm.html' /}
+#{set title:'Preduzeca' /}
+
+<script>
+
+$(document).ready(function(){
+	$("#radnikPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#radniciModal').modal('toggle');
+	});
+});
+
+function sync(item){
+	sifra = item.find(".sifra").html()
+    radnik = item.find(".radnik").html()
+    pocetak = item.find(".pocetak").html()
+    kraj = item.find(".kraj").html()
+    napomena = item.find(".napomena").html()
+    id = item.find(".id").html()
+    $("#sifra").val(oznaka);
+    $("#radnik").val(naziv);
+    $("#pocetak").val(oznaka);
+    $("#kraj").val(naziv);
+    $("#napomena").val(oznaka);
+    $("#id").val(id);
+
+}
+function remove(id){
+		$(location).attr('href','/Preduzeca/remove?id='+id);
+	}
+		 
+function nextform(id){
+		$(location).attr('href','/Radnici/next?id='+id);
+	}
+ 
+
+
+
+</script>
+
+
+
+<p>
+<ul>
+  <li><a href="@{Preduzeca.show("search")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+  <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
+  <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
+  <li><a  id = "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+  <li><a  id = "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+  <li><a  id = "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+  <li><a  id = "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+  <li><a href="@{Preduzeca.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+  <li><a href="#" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+  <li><a href="#" id = "nextform"><img src="@{'/public/images/nextform.gif'}"/></a></li>
+</ul>
+</p>
+
+
+<h1>Preduzeca</h1>
+
+<table>
+	<tr class = "header">
+	   <th>Naziv</th> 
+	   <th>PIB</th>
+	   <th>Adresa</th>
+	    <th>Radnik</th>
+	</tr>
+#{list items:preduzeca, as:'preduzece'}
+	<tr>
+		<td class = "naziv">${preduzece.naziv}</td>
+		<td class = "pib">${preduzece.pib}</td>
+		<td class = "adresa">${preduzece.adresa}</td>
+		<td class = "radnik">${preduzece.radnik}</td>
+		
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${preduzece.id}</td>
+	</tr>
+#{/list}
+</table>
+
+<div class = "panel">
+	<p>
+	
+				 #{set 'action'}
+				 #{if mode == 'add'}
+				 @{Preduzeca.create()}
+				 #{/if}
+				 #{elseif mode == 'edit'}
+				 @{Preduzeca.edit()}
+				 #{/elseif}
+				 #{else}
+				 @{Preduzeca.filter()}
+				 #{/else}
+				 #{/set}
+		<form action=${action} method="post">
+
+		
+				#{field 'id'}
+					<input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+				#{/}
+				
+				<p>
+				
+				#{field 'naziv'}
+					<label for = "${field.id}">Naziv</label>
+					<input type = "text" name = "${field.name}" id = "${field.id}"/>
+					
+				#{/}
+				</p>
+				<p>
+				#{field 'pib'}
+					<label for = "${field.id}">PIB: </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+				#{/}
+				</p>
+				<p>
+				#{field 'adresa'}
+					<label for = "${field.id}">Adresa: </label>
+					<input type = "text" name = "${field.name}" id = "${field.name}"/>
+				#{/}
+				</p>
+				<p>
+				#{field 'radnik'}
+					<label for = "${field.id}">Radnik</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:radnici, as:'radnik'}
+					<option value = "radnik.id">${radnik.ime}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+				#{/}
+				</p>
+				
+				<div id = "formActions">
+					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+					<a href = "@{Preduzeca.show("edit")}" style="margin-left:1em">Rollback</a>
+				</div>			
+				</form>
+		
+	</p>
+</div>
+
