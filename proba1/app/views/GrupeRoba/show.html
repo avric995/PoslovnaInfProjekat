@@ -1,0 +1,157 @@
+#{extends 'standardForm.html' /}
+#{set title:'GrupeRoba' /}
+
+<script>
+
+$(document).ready(function(){
+	$("#preduzecePickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#preduzecaModal').modal('toggle');
+	});
+});
+
+function sync(item){
+	nazivGrupe = item.find(".nazivGrupe").html()
+    id = item.find(".id").html()
+    $("#nazivGrupe").val(nazivGrupe);
+   
+    
+    $("#id").val(id);
+
+}
+function remove(id){
+		$(location).attr('href','/GrupeRoba/remove?id='+id);
+	}
+		 
+
+ 
+
+
+
+</script>
+
+
+
+<p>
+<ul>
+  <li><a href="@{GrupeRoba.show("filter")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
+  <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
+  <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
+  <li><a  id = "first"><img src="@{'/public/images/first.gif'}"/></a></li>
+  <li><a  id = "prev"><img src="@{'/public/images/prev.gif'}"/></a></li>
+  <li><a  id = "next"><img src="@{'/public/images/next.gif'}"/></a></li>
+  <li><a  id = "last"><img src="@{'/public/images/last.gif'}"/></a></li>
+  <li><a href="@{GrupeRoba.show("add")}" id = "add"><img src="@{'/public/images/add.gif'}"/></a></li>
+  <li><a href="#" id = "remove"><img src="@{'/public/images/remove.gif'}"/></a></li>
+  <li><a href="#" id = "nextform"><img src="@{'/public/images/nextform.gif'}"/></a></li>
+</ul>
+</p>
+
+
+<h1>Grupe roba</h1>
+
+<table>
+	<tr class = "header">
+	   <th>Naziv grupe</th>
+	   <th>Preduzece </th> 
+	  
+	   
+	</tr>
+#{list items:grupeRoba, as:'grupaRobe'}
+	<tr>
+		<td class = "nazivGrupe">${grupaRobe.nazivGrupe}</td>
+		<td class = "preduzece">${grupaRobe.preduzece}</td>
+		
+		
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${grupaRobe.id}</td>
+	</tr>
+#{/list}
+</table>
+
+
+	
+#{set 'action'}
+				 
+#{if mode == 'add'}
+	@{GrupeRoba.add()}
+#{/if}
+				 
+#{elseif mode == 'edit'}
+	@{GrupeRoba.edit()}
+#{/elseif}
+				 
+#{else}
+	@{GrupeRoba.filter()}
+#{/else}
+#{/set}
+
+
+<div class = "panel">
+	<p>
+		<form action=${action} method="post">
+
+		
+				#{field 'id'}
+					<input type = "hidden" name = "${field.name}" id = "${field.id}"/>
+				#{/}
+				
+				<p>
+				
+				#{field 'nazivGrupe'}
+					<label for = "${field.id}">Naziv grupe</label>
+					<input type = "text" name = "${field.name}" id = "${field.id}"/>
+					<span>#{error 'nazivGrupe' /}</span>
+					
+				#{/}
+				</p>
+				<p>
+				#{field 'preduzece'}
+					<label for = "${field.id}">Preduzece</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:preduzeca, as:'preduzece'}
+					<option value = "${preduzece.id}">${preduzece.naziv}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#preduzecaModal">...	</button>
+				#{/}
+				</p>
+				
+				<div id = "formActions">
+					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
+					<a href = "@{GrupeRoba.show("")}" style="margin-left:1em">Rollback</a>
+				</div>			
+				</form>
+		
+	</p>
+</div>
+<!-- Modal -->
+  <div class="modal fade" id="preduzecaModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Preduzeca
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>Naziv</th>
+		</tr>
+		#{list items:preduzeca, as:'preduzece'}
+		<tr>
+			<td class = "naziv">${preduzece.naziv}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${preduzece.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "preduzecePickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>

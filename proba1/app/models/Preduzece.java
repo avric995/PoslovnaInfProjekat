@@ -12,16 +12,19 @@ import play.db.jpa.Model;
 
 @Entity
 public class Preduzece extends Model {
+		@Column(nullable = false )
+		public String adresa;
 		@Column(nullable = false, unique = true)
-		public String sifra;
-		@Column(nullable = false)
 		public String naziv;
 		@Column(nullable = false)
 		public String PIB;
-		@Column(nullable = true)
-		public String sifraDelatnosti;
-		@Column(nullable = false)
-		public String registarskiBroj;
-		@Column(nullable = false)
-		public boolean aktivno;
+		public Preduzece(String adresa, String naziv, String pib) {
+			super();
+			this.adresa = adresa;
+			this.naziv = naziv;
+			this.PIB = pib;
+		}
+		
+		@OneToMany (mappedBy ="preduzece")
+		public List<GrupaRobe> grupeRoba;
 }

@@ -2,6 +2,23 @@
 #{set title:'Robe.html' /}
 
 <script>
+$(document).ready(function(){
+	$("grupaRobePickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#grupaRobe').modal('toggle');
+	})
+})
+
+$(document).ready(function(){
+	$("jedinicaMerePickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#jediniceMera').modal('toggle');
+	})
+})
+
+
 
 function sync(item){
 	nazivRobe = item.find(".nazivRobe").html()
@@ -47,10 +64,14 @@ function remove(id){
 <table>
 	<tr class = "header">
 	   <th>nazivRobe</th> 
+	   <th>Jedinica mere</th>
+	   <th>Grupa robe</th>
 	</tr>
 #{list items:robe, as:'roba'}
 	<tr>
 		<td class = "nazivRobe">${roba.nazivRobe}</td>
+		<td class = "jedinicaMere">${roba.jedinicaMere.nazivJedMere}</td>
+		<td class = "grupaRobe">${roba.grupaRobe}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${roba.id}</td>
 	</tr>
 #{/list}
@@ -92,6 +113,30 @@ function remove(id){
 					
 				#{/}
 				</p>
+				<p>
+				#{field 'jedinicaMere'}
+					<label for = "${field.id}">Jedinica mere</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:jediniceMera, as:'jedinicaMere'}
+					<option value = "${jedinicaMere.id}">${jedinicaMere.nazivJedMere}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#jediniceMeraModal">...	</button>
+				#{/}
+				</p>
+				
+				<p>
+				#{field 'grupaRobe'}
+					<label for = "${field.id}">Grupa robe</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:grupeRoba, as: 'grupaRobe'}
+					<option value = "${grupaRobe.id}">${grupaRobe.nazivGrupe}</option>
+					#{/list}
+					</select>
+					 <button type = "button" class = "btn btn-info btn-sm" data-toggle= "modal" data-target= "#grupeRobaModal">... </button>
+				#{/}
+				</p>
 				
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
@@ -102,3 +147,64 @@ function remove(id){
 	</p>
 </div>
 
+<!-- Modal  -->
+  <div class="modal fade" id="jediniceMeraModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Jedinice mera
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>nazivJedMere</th> 
+	   	  
+		</tr>
+		#{list items:jediniceMera, as:'jedinicaMere'}
+		<tr>
+			<td class = "nazivJedMere">${jedinicaMere.nazivJedMere}</td>
+			
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${jedinicaMere.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "jedinicaMerePickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+<!-- Modal 2 -->
+  <div class="modal fade" id="grupeRobaModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Grupe roba
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>nazivGrupe</th> 
+	   	  
+		</tr>
+		#{list items:grupeRoba, as:'grupaRobe'}
+		<tr>
+			<td class = "nazivGrupe">${grupaRobe.nazivGrupe}</td>
+			
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${grupaRobe.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "grupaRobePickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>

@@ -11,4 +11,9 @@ public class Roba extends Model {
 	@Column(nullable = false)
 	public String nazivRobe;
 	
+	@ManyToOne public JedinicaMere jedinicaMere;
+	
+	@ManyToOne public GrupaRobe grupaRobe;
+	
+	
 }
