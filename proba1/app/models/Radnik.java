@@ -44,6 +44,15 @@ public class Radnik extends Model {
 		public String adresa;
 		@Column(nullable = true)
 		public String telefon;
+<<<<<<< HEAD
+=======
+		
+		@OneToMany(mappedBy = "radnik")
+		public List<Preduzece> preduzeca;
+		
+		@OneToMany(mappedBy = "radnik")
+		public List<Magacin> magacini;
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 
 		public Radnik(String ime, String prezime, String sifra) {
 			super();

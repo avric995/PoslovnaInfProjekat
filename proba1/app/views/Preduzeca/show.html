@@ -3,6 +3,17 @@
 
 <script>
 
+<<<<<<< HEAD
+=======
+$(document).ready(function(){
+	$("#radnikPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#radniciModal').modal('toggle');
+	});
+});
+
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 function sync(item){
 	sifra = item.find(".sifra").html()
     radnik = item.find(".radnik").html()
@@ -57,12 +68,21 @@ function nextform(id){
 	   <th>Naziv</th> 
 	   <th>PIB</th>
 	   <th>Adresa</th>
+<<<<<<< HEAD
+=======
+	    <th>Radnik</th>
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 	</tr>
 #{list items:preduzeca, as:'preduzece'}
 	<tr>
 		<td class = "naziv">${preduzece.naziv}</td>
 		<td class = "pib">${preduzece.pib}</td>
 		<td class = "adresa">${preduzece.adresa}</td>
+<<<<<<< HEAD
+=======
+		<td class = "radnik">${preduzece.radnik}</td>
+		
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${preduzece.id}</td>
 	</tr>
 #{/list}
@@ -109,6 +129,21 @@ function nextform(id){
 					<input type = "text" name = "${field.name}" id = "${field.name}"/>
 				#{/}
 				</p>
+<<<<<<< HEAD
+=======
+				<p>
+				#{field 'radnik'}
+					<label for = "${field.id}">Radnik</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:radnici, as:'radnik'}
+					<option value = "radnik.id">${radnik.ime}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+				#{/}
+				</p>
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 				
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
@@ -119,3 +154,37 @@ function nextform(id){
 	</p>
 </div>
 
+<<<<<<< HEAD
+=======
+<!-- Modal -->
+  <div class="modal fade" id="radniciModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Radnici
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>Ime</th>
+		   <th>Prezime</th>
+		</tr>
+		#{list items:radnici, as:'radnik'}
+		<tr>
+			<td class = "ime">${radnik.ime}</td>
+			<td class = "prezime">${radnik.prezime}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${radnik.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "radnikPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573

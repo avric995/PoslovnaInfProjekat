@@ -2,6 +2,24 @@
 #{set title:'StavkeDokumenata' /}
 
 <script>
+<<<<<<< HEAD
+=======
+$(document).ready(function(){
+	$("#prometniDokumentPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#prometniDokumentiModal').modal('toggle');
+	});
+});
+
+$(document).ready(function(){
+	$("#robaPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#robeModal').modal('toggle');
+	});
+});
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 
 function sync(item){
 	kolicina = item.find(".kolicina").html()
@@ -52,12 +70,22 @@ function remove(id){
 	   <th>kolicina</th> 
 	   <th>cena</th>
 	   <th>vrednost</th>
+<<<<<<< HEAD
+=======
+	   <th>Prometni Dokument</th>
+	   <th>Roba</th>
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 	</tr>
 #{list items:stavkeDokumenata, as:'stavkaDokumenta'}
 	<tr>
 		<td class = "kolicina">${stavkaDokumenta.kolicina}</td>
 		<td class = "cena">${stavkaDokumenta.cena}</td>
 		<td class = "vrednost">${stavkaDokumenta.vrednost}</td>
+<<<<<<< HEAD
+=======
+		<td class = "prometniDokument">${stavkaDokumenta.prometniDokument}</td>
+		<td class = "roba">${stavkaDokumenta.roba}</td>
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${stavkaDokumenta.id}</td>
 	</tr>
 #{/list}
@@ -113,6 +141,31 @@ function remove(id){
 					<span>#{error 'vrednost' /}</span>
 				#{/}
 				</p>
+<<<<<<< HEAD
+=======
+				<p>
+				#{field 'prometniDokument'}
+					<label for = "${field.id}">Prometni Dokument</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:prometniDokumenti, as:'prometniDokument'}
+					<option value = "${prometniDokument.id}">${prometniDokument.vrstaDokumenta}</option>
+					#{/list}
+					</select>
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+				#{/}
+				</p>
+				<p>
+				#{field 'roba'}
+					<label for = "${field.id}">Roba</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:robe, as:'roba'}
+					<option value = "${roba.id}">${roba.nazivRobe}</option>
+					#{/list}
+					</select>
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+				#{/}
+				</p>
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
 					<a href = "@{PoslovniPartneri.show("")}" style="margin-left:1em">Rollback</a>
@@ -122,3 +175,80 @@ function remove(id){
 	</p>
 </div>
 
+<<<<<<< HEAD
+=======
+<!-- Modal -->
+  <div class="modal fade" id="prometniDokumentiModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Prometni Dokumenti
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		 	<th>vrstaDokumenta</th> 
+	   		<th>redniBrojDokumenta</th>
+	   		<th>datumFormiranja</th>
+	   		<th>datumKnjizenja</th>
+	   		<th>status</th>
+	   		<th>Magacin</th>
+	   		<th>PoslovniPartner</th>
+		</tr>
+		#{list items:prometniDokumenti, as:'prometniDokument'}
+		<tr>
+			<td class = "vrstaDokumenta">${prometniDokument.vrstaDokumenta}</td>
+			<td class = "redniBrojDokumenta">${prometniDokument.redniBrojDokumenta}</td>
+			<td class = "datumFormiranja">${prometniDokument.datumFormiranja}</td>
+			<td class = "datumKnjizenja">${prometniDokument.datumKnjizenja}</td>
+			<td class = "status">${prometniDokument.status}</td>
+			<td class = "status">${prometniDokument.magacin}</td>
+			<td class = "status">${prometniDokument.poslovniPartner}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${prometniDokument.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "prometniDokumentPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+
+<!-- Modal 2 -->
+  <div class="modal fade" id="robeModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Roba
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		 	<th>Naziv Robe</th> 
+		</tr>
+		#{list items:robe, as:'roba'}
+		<tr>
+			<td class = "nazivRobe">${roba.nazivRobe}</td>
+			
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${roba.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "robaPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+
+
+>>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
