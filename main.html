@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+    	<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    	#{get 'moreScripts' /}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
+    <body>
+
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="../../">Magacin</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="../../">Home</a></li>
+              <li><a href="../Magacini/show">Magacini</a></li>
+              <li><a href="../Artikli/show">Artikli</a></li>
+              <li><a href="../Preduzeca/show">Preduzeca</a></li>
+              <li><a href="../Radnici/show">Radnici</a></li>
+              <li><a href="../PoslovniPartneri/show">Poslovni partneri</a></li>
+              <li><a href="../AnalitikeMagKartica/show">Analitika</a></li>
+              <li><a href="../StavkeDokumenata/show">Stavke</a></li>
+              <li><a href="../RobneKartice/show">Robne kartice</a></li>
+              <li><a href="../PoslovneGodine/show">Godine</a></li>
+              <li><a href="../JediniceMera/show">Jedinice</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+              <li><a href="@{Magacini.logout()}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </div>
+        </nav>
+        #{doLayout /}
+        
+        
+    </body>
+</html>
