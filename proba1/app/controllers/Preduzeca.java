@@ -2,13 +2,10 @@ package controllers;
 
 import java.util.List;
 
-<<<<<<< HEAD
 import models.GrupaRobe;
-import models.Preduzece;
-=======
+import models.NaseljenoMesto;
 import models.Preduzece;
 import models.Radnik;
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 import play.data.validation.Required;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -18,28 +15,18 @@ public class Preduzeca extends Controller{
 
 	public static void show(String mode){
     	List<Preduzece> preduzeca = Preduzece.findAll();
-<<<<<<< HEAD
-    	List<GrupaRobe> grupeRoba = GrupaRobe.findAll();
-    	if (mode == null || mode.equals(""))
-    		 mode = "edit";
-    	
-    	render(preduzeca, mode);
-=======
     	List<Radnik> radnici = Radnik.findAll();
+    	List<GrupaRobe> grupeRoba = GrupaRobe.findAll();
+    	List<NaseljenoMesto> naseljenaMesta = NaseljenoMesto.findAll();
     	if (mode == null || mode.equals(""))
     		 mode = "edit";
     	
     	render(preduzeca,radnici, mode);
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
     }
     
    
     
-<<<<<<< HEAD
-    public static void create(String naziv,String pib, String adresa) {
-=======
-    public static void create(String naziv,String pib, String adresa, long radnik) {
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+    public static void create(String naziv,String pib, String adresa, long radnik,  long naseljenoMesto) {
 //		validation.required(oznaka);
 //		validation.required(naziv);
 //		validation.minSize(oznaka, 2);
@@ -51,43 +38,32 @@ public class Preduzeca extends Controller{
 //			 validation.keep();
 //			 show("add");
 //			}
-		Preduzece pred = new Preduzece(adresa,naziv,pib);
-<<<<<<< HEAD
+		Preduzece pred = new Preduzece();
+		pred.naziv = naziv;
+		pred.PIB = pib;
+		pred.adresa = adresa;
+    pred.radnik = Radnik.findById(radnik);
+		pred.naseljenoMesto = NaseljenoMesto.findById(naseljenoMesto);
+		
 		
 		 
-=======
-		pred.radnik = Radnik.findById(radnik);
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 		List<Preduzece> preduzeca = Preduzece.findAll();
 		pred.save();
 		show("add");
 	}
 
-<<<<<<< HEAD
-    public static void edit(String naziv,String PIB,String adresa, long id) {
-    	Preduzece p = Preduzece.findById(id);
-    	if(p!=null){
-    	p.naziv=naziv;
-    	p.PIB = PIB;
-    	p.adresa = adresa;
-    	//p.radnik = Radnik.findById(radnik);
-    	p.save();
-    	}
-    	show("edit");
-    	}
-=======
-	public static void edit(String naziv,String PIB,String adresa,long radnik, Long id) {
+	public static void edit(String naziv,String PIB,String adresa,long radnik, long id, long naseljenoMesto) {
 	Preduzece p = Preduzece.findById(id);
 	if(p!=null){
 	p.naziv=naziv;
 	p.PIB = PIB;
 	p.adresa = adresa;
 	p.radnik = Radnik.findById(radnik);
+  p.naseljenoMesto = NaseljenoMesto.findById(naseljenoMesto);
 	p.save();
 	}
 	show("edit");
 	}
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 
 	public static void filter() {
 	

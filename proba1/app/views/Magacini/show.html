@@ -2,8 +2,6 @@
 #{set title:'Magacini' /}
 
 <script>
-<<<<<<< HEAD
-=======
 $(document).ready(function(){
 	$("#radnikPickup").click(function(){
 		id = $(".highlighted").find(".id").html();
@@ -11,7 +9,6 @@ $(document).ready(function(){
 		$('#radniciModal').modal('toggle');
 	});
 });
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 
 function sync(item){
 	naziv = item.find(".naziv").html()
@@ -57,18 +54,12 @@ function nextform(id){
 <table>
 	<tr class = "header">
 	   <th>Name</th>
-<<<<<<< HEAD
-=======
 	   <th>Radnik</th>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 	</tr>
 #{list items:magacini, as:'magacin'}
 	<tr>
 		<td class = "name">${magacin.naziv}</td>
-<<<<<<< HEAD
-=======
 		<td class = "radnik">${magacin.radnik}</td>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${magacin.id}</td>
 	</tr>
 #{/list}
@@ -102,11 +93,6 @@ function nextform(id){
 					<input type = "text" name = "${field.name}" id = "${field.id}"/>
 				#{/}
 				</p>
-<<<<<<< HEAD
-				<div id = "formActions">
-					<input type = "submit" value = "Confirm" style="margin-left:6em"/>
-					<a href = "@{Magacini.show("edit")}" style="margin-left:1em">Rollback</a>
-=======
 				<p>
 				#{field 'radnik'}
 					<label for = "${field.id}">Radnik</label>
@@ -122,15 +108,12 @@ function nextform(id){
 				<div id = "formActions">
 					<input type = "submit" value = "Confirm" style="margin-left:6em"/>
 					<a href = "@{Magacini.show("")}" style="margin-left:1em">Rollback</a>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 				</div>			
 				</form>
 		
 	</p>
 </div>
 
-<<<<<<< HEAD
-=======
 <!-- Modal -->
   <div class="modal fade" id="radniciModal" role="dialog">
     <div class="modal-dialog">
@@ -162,4 +145,3 @@ function nextform(id){
    </div>
 </div>
 
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573

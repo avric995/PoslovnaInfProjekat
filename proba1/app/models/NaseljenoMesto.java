@@ -1,8 +1,11 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import play.db.jpa.Model;
 
@@ -16,6 +19,9 @@ public class NaseljenoMesto extends Model{
 	public String postanskiBroj;
 	@ManyToOne
 	public Drzava drzava;
+	
+	@OneToMany (mappedBy = "naseljenoMesto")
+	public List<Preduzece> preduzeca;
 	
 	public NaseljenoMesto(String oznaka, String naziv, String postanskiBroj, Drzava drzava) {
 		super();

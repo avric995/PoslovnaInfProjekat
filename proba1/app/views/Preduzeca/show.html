@@ -3,8 +3,6 @@
 
 <script>
 
-<<<<<<< HEAD
-=======
 $(document).ready(function(){
 	$("#radnikPickup").click(function(){
 		id = $(".highlighted").find(".id").html();
@@ -13,7 +11,14 @@ $(document).ready(function(){
 	});
 });
 
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+$(document).ready(function(){
+	$("#naseljenoMestoPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#naseljenaMestaModal').modal('toggle');
+	});
+});
+
 function sync(item){
 	sifra = item.find(".sifra").html()
     radnik = item.find(".radnik").html()
@@ -68,21 +73,16 @@ function nextform(id){
 	   <th>Naziv</th> 
 	   <th>PIB</th>
 	   <th>Adresa</th>
-<<<<<<< HEAD
-=======
 	    <th>Radnik</th>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+	   <th>Naseljeno Mesto</th>
 	</tr>
 #{list items:preduzeca, as:'preduzece'}
 	<tr>
 		<td class = "naziv">${preduzece.naziv}</td>
-		<td class = "pib">${preduzece.pib}</td>
+		<td class = "pib">${preduzece.PIB}</td>
 		<td class = "adresa">${preduzece.adresa}</td>
-<<<<<<< HEAD
-=======
 		<td class = "radnik">${preduzece.radnik}</td>
-		
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+		<td class = "naseljenoMesto">${preduzece.naseljenoMesto}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${preduzece.id}</td>
 	</tr>
 #{/list}
@@ -129,8 +129,6 @@ function nextform(id){
 					<input type = "text" name = "${field.name}" id = "${field.name}"/>
 				#{/}
 				</p>
-<<<<<<< HEAD
-=======
 				<p>
 				#{field 'radnik'}
 					<label for = "${field.id}">Radnik</label>
@@ -143,7 +141,19 @@ function nextform(id){
 					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
 				#{/}
 				</p>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+	      <p>
+				#{field 'naseljenoMesto'}
+					<label for = "${field.id}">Naseljeno mesto</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:naseljenaMesta, as:'naseljenoMesto'}
+					<option value = "${naseljenoMesto.id}">${naseljenoMesto.naziv}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#naseljenaMestaModal">...	</button>
+				#{/}
+				</p>
+
 				
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
@@ -154,8 +164,6 @@ function nextform(id){
 	</p>
 </div>
 
-<<<<<<< HEAD
-=======
 <!-- Modal -->
   <div class="modal fade" id="radniciModal" role="dialog">
     <div class="modal-dialog">
@@ -187,4 +195,34 @@ function nextform(id){
    </div>
 </div>
 
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+<!-- Modal 2 -->
+  <div class="modal fade" id="naseljenaMestaModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Naseljena mesta
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>Naziv</th>
+		</tr>
+		#{list items:naseljenaMesta, as:'naseljenoMesto'}
+		<tr>
+			<td class = "naziv">${naseljenoMesto.naziv}</td>
+			<td class = "oznaka">${naseljenoMesto.oznaka}</td>
+			<td class = "postanskiBroj">${naseljenoMesto.postanskiBroj}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${magacin.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "naseljenoMestoPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+

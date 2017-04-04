@@ -2,8 +2,6 @@
 #{set title:'StavkeDokumenata' /}
 
 <script>
-<<<<<<< HEAD
-=======
 $(document).ready(function(){
 	$("#prometniDokumentPickup").click(function(){
 		id = $(".highlighted").find(".id").html();
@@ -19,7 +17,6 @@ $(document).ready(function(){
 		$('#robeModal').modal('toggle');
 	});
 });
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 
 function sync(item){
 	kolicina = item.find(".kolicina").html()
@@ -70,22 +67,16 @@ function remove(id){
 	   <th>kolicina</th> 
 	   <th>cena</th>
 	   <th>vrednost</th>
-<<<<<<< HEAD
-=======
 	   <th>Prometni Dokument</th>
 	   <th>Roba</th>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 	</tr>
 #{list items:stavkeDokumenata, as:'stavkaDokumenta'}
 	<tr>
 		<td class = "kolicina">${stavkaDokumenta.kolicina}</td>
 		<td class = "cena">${stavkaDokumenta.cena}</td>
 		<td class = "vrednost">${stavkaDokumenta.vrednost}</td>
-<<<<<<< HEAD
-=======
 		<td class = "prometniDokument">${stavkaDokumenta.prometniDokument}</td>
 		<td class = "roba">${stavkaDokumenta.roba}</td>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${stavkaDokumenta.id}</td>
 	</tr>
 #{/list}
@@ -141,8 +132,6 @@ function remove(id){
 					<span>#{error 'vrednost' /}</span>
 				#{/}
 				</p>
-<<<<<<< HEAD
-=======
 				<p>
 				#{field 'prometniDokument'}
 					<label for = "${field.id}">Prometni Dokument</label>
@@ -151,7 +140,7 @@ function remove(id){
 					<option value = "${prometniDokument.id}">${prometniDokument.vrstaDokumenta}</option>
 					#{/list}
 					</select>
-					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#prometniDokumentiModal">...	</button>
 				#{/}
 				</p>
 				<p>
@@ -162,10 +151,9 @@ function remove(id){
 					<option value = "${roba.id}">${roba.nazivRobe}</option>
 					#{/list}
 					</select>
-					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#robeModal">...	</button>
 				#{/}
 				</p>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
 					<a href = "@{PoslovniPartneri.show("")}" style="margin-left:1em">Rollback</a>
@@ -175,8 +163,6 @@ function remove(id){
 	</p>
 </div>
 
-<<<<<<< HEAD
-=======
 <!-- Modal -->
   <div class="modal fade" id="prometniDokumentiModal" role="dialog">
     <div class="modal-dialog">
@@ -251,4 +237,3 @@ function remove(id){
 
 
 
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
