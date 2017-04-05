@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 
+import models.JedinicaMere;
 import models.Magacin;
 import models.Radnik;
 import play.data.validation.Required;
@@ -52,9 +53,13 @@ public class Magacini extends Controller{
 		show("");
 		}
 
-	public static void filter() {
-	
-	}
+	 public static void filter(String naziv) {
+			
+	    List<Magacin> magacini = Magacin.find("byNazivLike","%"+ naziv.toLowerCase() +"%").fetch();
+	    String mode = "edit";
+	    renderTemplate("Magacini/show.html", magacini, mode);
+	    	
+	    }
     
 	public static void remove(Long id){
 		Magacin mag = Magacin.findById(id);

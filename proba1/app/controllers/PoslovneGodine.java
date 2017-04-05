@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Drzava;
+import models.NaseljenoMesto;
 import models.PoslovnaGodina;
 import play.data.validation.Required;
 import play.mvc.*;
@@ -45,10 +46,12 @@ public class PoslovneGodine extends Controller {
     	}
     		show("edit");
     }
-    public static void filter() {
-		/*List<Drzava> drzave = Drzava.find("byNazivLikeAndOznakaLike", "%"+naziv+"%", "%"+oznaka+"%").fetch();
+	public static void filter(String godina, String zakljucena){
+		
+		List<PoslovnaGodina> poslovneGodine = PoslovnaGodina.find("byGodinaLikeAndZakljucenaLike","%"+ godina.toLowerCase() +"%", "%"+zakljucena.toLowerCase()+"%").fetch();
 		String mode = "edit";
-		renderTemplate("Drzave/show.html", drzave, mode);*/
+		renderTemplate("PoslovneGodine/show.html", poslovneGodine, mode);
+	
 	}
     
     public static void remove (Long id){

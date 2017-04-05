@@ -21,7 +21,7 @@ public class Preduzeca extends Controller{
     	if (mode == null || mode.equals(""))
     		 mode = "edit";
     	
-    	render(preduzeca,radnici, mode);
+    	render(preduzeca,radnici,naseljenaMesta, mode);
     }
     
    
@@ -42,12 +42,8 @@ public class Preduzeca extends Controller{
 		pred.naziv = naziv;
 		pred.PIB = pib;
 		pred.adresa = adresa;
-    pred.radnik = Radnik.findById(radnik);
+		pred.radnik = Radnik.findById(radnik);
 		pred.naseljenoMesto = NaseljenoMesto.findById(naseljenoMesto);
-		
-		
-		 
-		List<Preduzece> preduzeca = Preduzece.findAll();
 		pred.save();
 		show("add");
 	}
@@ -66,7 +62,7 @@ public class Preduzeca extends Controller{
 	}
 
 	public static void filter() {
-	
+	//ima greska na kontroleru ispraviti je i uraditi filter
 	}
     
 	public static void remove(Long id){

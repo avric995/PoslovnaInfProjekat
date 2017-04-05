@@ -207,13 +207,15 @@ function nextform(id){
 	    <table style = "padding:2em">
 		<tr class = "header">
 		   <th>Naziv</th>
+		   <th>Oznaka</th>
+		   <th>Postanski broj</th>
 		</tr>
 		#{list items:naseljenaMesta, as:'naseljenoMesto'}
 		<tr>
 			<td class = "naziv">${naseljenoMesto.naziv}</td>
 			<td class = "oznaka">${naseljenoMesto.oznaka}</td>
 			<td class = "postanskiBroj">${naseljenoMesto.postanskiBroj}</td>
-			<td style = "visibility: hidden; max-width: 0px" class = "id">${magacin.id}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${naseljenoMesto.id}</td>
 		</tr>
 		#{/list}
 		</table>

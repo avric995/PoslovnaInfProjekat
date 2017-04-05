@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Drzava;
+import models.NaseljenoMesto;
 import models.PoslovniPartner;
 import net.sf.oval.constraint.MaxSize;
 import play.data.validation.Required;
@@ -50,10 +51,13 @@ public class PoslovniPartneri extends Controller {
     	show("edit");
     	}
 
-    public static void filter() {
-    		/*List<Drzava> drzave = Drzava.find("byNazivLikeAndOznakaLike", "%"+naziv+"%", "%"+oznaka+"%").fetch();
-    		String mode = "edit";
-    		renderTemplate("Drzave/show.html", drzave, mode);*/
+    public static void filter(String tipPartnera,String nazivPartnera, String pib,  String adresa) {
+    		
+    	List<PoslovniPartner> poslovniPartneri = PoslovniPartner.find("byTipPartneraLikeAndNazivPartneraLikeAndPibLikeAndAdresaLike","%"+ tipPartnera +"%","%"+ nazivPartnera +"%", "%"+pib+"%","%"+adresa+"%").fetch();
+    	
+    	String mode = "edit";
+    	renderTemplate("PoslovniPartneri/show.html", poslovniPartneri, mode);
+    	
     	}
         
     	public static void remove(Long id){

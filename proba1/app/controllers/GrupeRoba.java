@@ -6,6 +6,7 @@ import models.Drzava;
 import models.GrupaRobe;
 import models.JedinicaMere;
 import models.PoslovnaGodina;
+import models.PoslovniPartner;
 import models.Preduzece;
 import play.data.validation.Required;
 import play.mvc.*;
@@ -49,11 +50,14 @@ public class GrupeRoba extends Controller {
     	}
     		show("edit");
     }
-    public static void filter() {
-		/*List<Drzava> drzave = Drzava.find("byNazivLikeAndOznakaLike", "%"+naziv+"%", "%"+oznaka+"%").fetch();
-		String mode = "edit";
-		renderTemplate("Drzave/show.html", drzave, mode);*/
-	}
+    public static void filter(@Required String nazivGrupe, long preduzece) {
+		
+    	List<GrupaRobe> grupeRoba = GrupaRobe.find("byNazivGrupeLike","%"+ nazivGrupe +"%").fetch();
+    	//List<Preduzece> preduzeca = Preduzece.findAll(); dodati preduzece pretragu
+    	String mode = "edit";
+    	renderTemplate("GrupeRoba/show.html", grupeRoba, mode);
+    	
+    	}
     
     public static void remove (Long id){
     	GrupaRobe grupaRobe = GrupaRobe.findById(id);
