@@ -23,6 +23,9 @@ public class NaseljenoMesto extends Model{
 	@OneToMany (mappedBy = "naseljenoMesto")
 	public List<Preduzece> preduzeca;
 	
+	@OneToMany (mappedBy = "naseljenoMesto")
+	public List<PoslovniPartner> poslovniPartneri;
+	
 	public NaseljenoMesto(String oznaka, String naziv, String postanskiBroj, Drzava drzava) {
 		super();
 		this.naziv = naziv;

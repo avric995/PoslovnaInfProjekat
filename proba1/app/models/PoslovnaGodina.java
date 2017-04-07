@@ -15,5 +15,8 @@ public class PoslovnaGodina extends Model {
 	@Column(nullable = false)
 	public String zakljucena;
 	
+	@OneToMany(mappedBy = "poslovnaGodina")
+	public List<RobnaKartica> robneKartice;
+	
     
 }

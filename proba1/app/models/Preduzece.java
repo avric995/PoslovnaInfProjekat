@@ -29,6 +29,12 @@ public class Preduzece extends Model {
 		
     	@ManyToOne
 		public NaseljenoMesto naseljenoMesto;
+    	
+    	@OneToMany (mappedBy ="preduzece")
+    	public List<PoslovniPartner> poslovniPartneri;
+    	
+    	@OneToMany (mappedBy = "preduzece")
+    	public List<Magacin> magacini;
 		
 		
 		

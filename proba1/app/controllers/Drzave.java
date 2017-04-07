@@ -49,8 +49,11 @@ public class Drzave extends Controller{
 	show("");
 	}
 
-	public static void filter() {
-	
+	public static void filter(String naziv, String oznaka){
+		List<Drzava> drzave = Drzava.find("byNazivLikeAndOznakaLike", "%"+naziv+"%", "%"+oznaka+"%").fetch();
+		String mode = "edit";
+		renderTemplate("Drzave/show.html", drzave, mode);
+		
 	}
     
 	public static void remove(Long id){

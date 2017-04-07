@@ -83,12 +83,13 @@ function remove(id){
 		<td class = "datumFormiranja">${prometniDokument.datumFormiranja}</td>
 		<td class = "datumKnjizenja">${prometniDokument.datumKnjizenja}</td>
 		<td class = "status">${prometniDokument.status}</td>
-		<td class = "magacin">${prometniDokument.magacin}</td>
-		<td class = "poslovniPartner">${prometniDokument.poslovniPartner}</td>
+		<td class = "magacin">${prometniDokument.magacin.naziv}</td>
+		<td class = "poslovniPartner">${prometniDokument.poslovniPartner.nazivPartnera}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${prometniDokument.id}</td>
 	</tr>
 #{/list}
 </table>
+<br><a href="@{PrometniDokumenti.proknjizi()}"id="Proknjizi">Proknjizi</a>
 
 
 	

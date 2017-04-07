@@ -75,8 +75,8 @@ function remove(id){
 		<td class = "kolicina">${stavkaDokumenta.kolicina}</td>
 		<td class = "cena">${stavkaDokumenta.cena}</td>
 		<td class = "vrednost">${stavkaDokumenta.vrednost}</td>
-		<td class = "prometniDokument">${stavkaDokumenta.prometniDokument}</td>
-		<td class = "roba">${stavkaDokumenta.roba}</td>
+		<td class = "prometniDokument">${stavkaDokumenta.prometniDokument.vrstaDokumenta}</td>
+		<td class = "roba">${stavkaDokumenta.roba.nazivRobe}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${stavkaDokumenta.id}</td>
 	</tr>
 #{/list}

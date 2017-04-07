@@ -20,8 +20,14 @@ public class Magacin extends Model {
 	@OneToMany(mappedBy = "magacin")
 	public List<PrometniDokument> prometniDokumenti;
 	
+	@OneToMany(mappedBy = "magacin")
+	public List<RobnaKartica> robneKartice;
+	
 	@ManyToOne
 	public Radnik radnik;
+	
+	@ManyToOne
+	public Preduzece preduzece;
 	
 	public Magacin(){
 		

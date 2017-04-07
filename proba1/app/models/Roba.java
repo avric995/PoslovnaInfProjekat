@@ -17,5 +17,8 @@ public class Roba extends Model {
 	
 	@ManyToOne public GrupaRobe grupaRobe;
 	
+	@OneToMany(mappedBy = "roba")
+	public List<RobnaKartica> robneKartice;
+	
 	
 }

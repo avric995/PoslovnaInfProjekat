@@ -21,7 +21,7 @@ public class StavkeDokumenata extends Controller {
     	render(stavkeDokumenata,prometniDokumenti,robe, mode);
     }
 	
-	public static void add(@Required Integer kolicina,@Required Double cena,  @Required String vrednost, long prometniDokument, long roba) {
+	public static void add(@Required Integer kolicina,@Required Double cena,  @Required Double vrednost, long prometniDokument, long roba) {
 		
 /*		if(validation.hasErrors()) {
 			for(play.data.validation.Error error : validation.errors()) {
@@ -40,7 +40,7 @@ public class StavkeDokumenata extends Controller {
 			validation.keep();
 			show("add");
 	}
-    public static void edit(@Required Integer kolicina,@Required Double cena,  @Required String vrednost,long prometniDokument,long roba, long id) {
+    public static void edit(@Required Integer kolicina,@Required Double cena,  @Required Double vrednost,long prometniDokument,long roba, long id) {
     	StavkaDokumenta sD = StavkaDokumenta.findById(id);
     	if(sD!=null){
     	sD.kolicina = kolicina;

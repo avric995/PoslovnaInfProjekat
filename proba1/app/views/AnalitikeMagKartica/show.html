@@ -2,6 +2,13 @@
 #{set title:'AnalitikeMagKartica' /}
 
 <script>
+$(document).ready(function(){
+	$("#robnaKarticaPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#robneKarticeModal').modal('toggle');
+	});
+});
 
 function sync(item){
 	redniBroj = item.find(".redniBroj").html()
@@ -63,7 +70,7 @@ function remove(id){
 	   <th>Kolicina</th>
 	   <th>Cena</th>
 	   <th>Vrednost</th>
-	   
+	   <th>Robna Kartica</th>
 	   
 	</tr>
 #{list items:analitikeMagKartica, as:'analitikaMagKartice'}
@@ -74,7 +81,7 @@ function remove(id){
 		<td class = "kolicina">${analitikaMagKartice.kolicina}</td>
 		<td class = "cena">${analitikaMagKartice.cena}</td>
 		<td class = "vrednost">${analitikaMagKartice.vrednost}</td>
-		
+		<td class = "robnaKartica">${analitikaMagKartice.robnaKartica}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${analitikaMagKartice.id}</td>
 	</tr>
 #{/list}
@@ -151,6 +158,17 @@ function remove(id){
 					<span>#{error 'vrednost' /}</span>
 				#{/}
 				</p>
+				<p>
+				#{field 'robnaKartica'}
+					<label for = "${field.id}">Robna Kartica</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:robneKartice, as:'robnaKartica'}
+					<option value = "${robnaKartica.id}">${robnaKartica}</option>
+					#{/list}
+					</select>
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#robneKarticeModal">...	</button>
+				#{/}
+				</p>
 				
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
@@ -160,4 +178,59 @@ function remove(id){
 		
 	</p>
 </div>
+
+
+<!-- Modal 2 -->
+  <div class="modal fade" id="robneKarticeModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Robna Kartica
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		 	 <th>Cena</th> 
+	   		<th>Pocetno Stanje Kolicine</th>
+	   		<th>Pocetno Stanje Vrednosti</th>
+	   		<th>Promet Ulaza Kolicine</th>
+	   		<th>Promet Ulaza Vrednosti</th>
+	   		<th>Promet Izlaza Kolicine</th>
+	   		<th>Promet Izlaza Vrednosti</th>
+	   		<th>Ukupna Kolicina</th>
+	   		<th>Ukupna Vrednost</th>
+	   		<th>Magacin</th>
+	   		<th>Roba</th>
+	   		<th>Poslovna Godina</th>
+		</tr>
+		#{list items:robneKartice, as:'robnaKartica'}
+		<tr>
+		<td class = "cena1">${robnaKartica.cena}</td>
+		<td class = "pocStanjeKolicine">${robnaKartica.pocStanjeKolicine}</td>
+		<td class = "pocStanjeVrednosti">${robnaKartica.pocStanjeVrednosti}</td>
+		<td class = "prometUlazaKolicine">${robnaKartica.prometUlazaKolicine}</td>
+		<td class = "prometUlazaVrednosti">${robnaKartica.prometUlazaVrednosti}</td>
+		<td class = "prometIzlazaKolicine">${robnaKartica.prometIzlazaKolicine}</td>
+		<td class = "prometIzlazaVrednosti">${robnaKartica.prometIzlazaVrednosti}</td>
+		<td class = "ukupnaKolicina">${robnaKartica.ukupnaKolicina}</td>
+		<td class = "ukupnaVrednost">${robnaKartica.ukupnaVrednost}</td>
+		<td class = "magacin">${robnaKartica.magacin.naziv}</td>
+		<td class = "roba">${robnaKartica.roba.nazivRobe}</td>
+		<td class = "poslovnaGodina">${robnaKartica.poslovnaGodina.godina}</td>
+		<td style = "visibility: hidden; max-width: 0px" class = "id">${robnaKartica.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "robnaKarticaPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+
+
 

@@ -5,6 +5,7 @@ import java.util.List;
 import models.AnalitikaMagKartice;
 import models.Drzava;
 import models.PoslovnaGodina;
+import models.RobnaKartica;
 import play.data.validation.Required;
 import play.mvc.*;
 
@@ -13,15 +14,16 @@ public class AnalitikeMagKartica extends Controller {
 
     public static void show(String mode) {
         List<AnalitikaMagKartice> analitikeMagKartica = AnalitikaMagKartice.findAll();
+        List<RobnaKartica> robneKartice = RobnaKartica.findAll();
         if (mode == null || mode.equals(""))
 			mode ="edit";
         
-        render(analitikeMagKartica, mode);
+        render(analitikeMagKartica,robneKartice, mode);
     }
     
     
     public static void add( @Required Integer redniBroj, @Required String vrstaPrometa,@Required String smer,
-    		@Required Long kolicina, @Required Long cena, @Required Long vrednost){
+    		@Required Long kolicina, @Required Long cena, @Required Long vrednost, long robnaKartica){
     	
     	AnalitikaMagKartice analitikaMagKartice = new AnalitikaMagKartice();
     	
@@ -31,6 +33,7 @@ public class AnalitikeMagKartica extends Controller {
     	analitikaMagKartice.kolicina = kolicina;
     	analitikaMagKartice.cena = cena;
     	analitikaMagKartice.vrednost = vrednost;
+    	analitikaMagKartice.robnaKartica = RobnaKartica.findById(robnaKartica);
     	
     	
     	
@@ -42,7 +45,7 @@ public class AnalitikeMagKartica extends Controller {
     }
     
     public static void edit (@Required Integer redniBroj, @Required String vrstaPrometa,@Required String smer,
-    		@Required Long kolicina, @Required Long cena, @Required Long vrednost, long id){
+    		@Required Long kolicina, @Required Long cena, @Required Long vrednost,long robnaKartica, long id){
     	AnalitikaMagKartice amk = AnalitikaMagKartice.findById(id);
     	if(amk!=null){
     		
@@ -52,14 +55,19 @@ public class AnalitikeMagKartica extends Controller {
     		amk.kolicina = kolicina;
     		amk.cena = cena;
     		amk.vrednost = vrednost;
+    		amk.robnaKartica = RobnaKartica.findById(robnaKartica);
     		amk.save();
     	}
     		show("edit");
     }
-    public static void filter() {
-		/*List<Drzava> drzave = Drzava.find("byNazivLikeAndOznakaLike", "%"+naziv+"%", "%"+oznaka+"%").fetch();
-		String mode = "edit";
-		renderTemplate("Drzave/show.html", drzave, mode);*/
+    public static void filter(String vrstaPrometa,String smer) {
+    	//popraviti
+    	List<AnalitikaMagKartice> analitike = AnalitikaMagKartice.find("byVrstaPrometaLike", "%"+vrstaPrometa.toLowerCase()+"%").fetch();
+    	List<RobnaKartica> robneKartice = RobnaKartica.findAll();
+    	String mode = "edit";
+    	renderTemplate("AnalitikeMagKartica/show.html", analitike,robneKartice, mode);
+    		
+    	
 	}
     
     public static void remove (Long id){

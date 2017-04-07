@@ -4,6 +4,8 @@ import java.util.List;
 
 import models.GrupaRobe;
 import models.JedinicaMere;
+import models.NaseljenoMesto;
+import models.Preduzece;
 import models.Roba;
 import play.data.validation.Required;
 import play.mvc.*;
@@ -50,10 +52,14 @@ public class Robe extends Controller {
     	show("edit");
     	}
 
-    public static void filter() {
-    		/*List<Drzava> drzave = Drzava.find("byNazivLikeAndOznakaLike", "%"+naziv+"%", "%"+oznaka+"%").fetch();
-    		String mode = "edit";
-    		renderTemplate("Drzave/show.html", drzave, mode);*/
+    public static void filter(String nazivRobe) {
+		
+    	List<Roba> robe = Roba.find("byNazivRobeLike","%"+ nazivRobe.toLowerCase() +"%").fetch();
+    	List<JedinicaMere> jediniceMera = JedinicaMere.findAll(); 
+    	List<GrupaRobe> grupeRoba = GrupaRobe.findAll(); 
+    	String mode = "edit";
+    	renderTemplate("Robe/show.html", robe,jediniceMera,grupeRoba, mode);
+    	
     	}
         
     	public static void remove(Long id){

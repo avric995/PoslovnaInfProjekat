@@ -23,5 +23,8 @@ public class AnalitikaMagKartice extends Model {
 	@Column(nullable = false)
 	public Long vrednost;
 	
+	@ManyToOne
+	public RobnaKartica robnaKartica;
+	
     
 }

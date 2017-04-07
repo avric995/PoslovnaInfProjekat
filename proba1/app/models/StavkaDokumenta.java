@@ -13,7 +13,7 @@ public class StavkaDokumenta extends Model {
 	@Column(nullable = false)
 	public Double cena;
 	@Column(nullable = false)
-	public String vrednost;
+	public Double vrednost;
 	
 	@ManyToOne
 	public PrometniDokument prometniDokument;

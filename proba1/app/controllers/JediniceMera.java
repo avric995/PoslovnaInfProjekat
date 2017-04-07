@@ -47,8 +47,7 @@ public class JediniceMera extends Controller {
     }
     public static void filter(@Required String nazivJedMere) {
 		
-    	List<JedinicaMere> jediniceMera = JedinicaMere.find("byNazivJedMereLike","%"+ nazivJedMere +"%").fetch();
-    	//List<Preduzece> preduzeca = Preduzece.findAll(); dodati preduzece pretragu
+    	List<JedinicaMere> jediniceMera = JedinicaMere.find("byNazivJedMereLike","%"+ nazivJedMere.toLowerCase() +"%").fetch();
     	String mode = "edit";
     	renderTemplate("JediniceMera/show.html", jediniceMera, mode);
     	

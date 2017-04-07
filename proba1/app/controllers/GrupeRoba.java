@@ -52,10 +52,10 @@ public class GrupeRoba extends Controller {
     }
     public static void filter(@Required String nazivGrupe, long preduzece) {
 		
-    	List<GrupaRobe> grupeRoba = GrupaRobe.find("byNazivGrupeLike","%"+ nazivGrupe +"%").fetch();
-    	//List<Preduzece> preduzeca = Preduzece.findAll(); dodati preduzece pretragu
+    	List<GrupaRobe> grupeRoba = GrupaRobe.find("byNazivGrupeLike","%"+ nazivGrupe.toLowerCase() +"%").fetch();
+    	List<Preduzece> preduzeca = Preduzece.findAll(); 
     	String mode = "edit";
-    	renderTemplate("GrupeRoba/show.html", grupeRoba, mode);
+    	renderTemplate("GrupeRoba/show.html", grupeRoba,preduzeca, mode);
     	
     	}
     
