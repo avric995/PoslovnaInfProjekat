@@ -21,6 +21,12 @@ public class PoslovniPartner extends Model {
 	
 	@OneToMany(mappedBy = "poslovniPartner")
 	public List<PrometniDokument> prometniDokumenti;
+	
+	@ManyToOne
+	public Preduzece preduzece;
+	
+	@ManyToOne
+	public NaseljenoMesto naseljenoMesto;
 
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Artikal;
 import models.Magacin;
+import models.PoslovnaGodina;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -47,18 +48,30 @@ public class Artikli extends Controller{
 		show("add");
 	}
 
-	public static void edit(String naziv,String sifra,String jedinica, float pakovanje, Magacin magacin) {
-
-	}
+	public static void edit(String naziv,String sifra,String jedinica, float pakovanje, long magacin, long id) {
+		  Artikal ar = Artikal.findById(id);
+		  if (ar!=null){
+		   ar.naziv = naziv;
+		   ar.jedinicaMere = jedinica;
+		   ar.pakovanje = pakovanje;
+		   ar.magacin = Magacin.findById(magacin);
+		   ar.save();
+		 }
+		 show("edit");
+		}
 	
 	public static void remove(Long id){
-		Artikal nMesto = Artikal.findById(id);
-		nMesto.delete();
+		Artikal artikal = Artikal.findById(id);
+		artikal.delete();
 		show("");
 	}	
 
-	public static void filter() {
+	/*public static void filter(String godina, String zakljucena){
+		
+		List<Artikal> artikli = PoslovnaGodina.find("byGodinaLikeAndZakljucenaLike","%"+ godina.toLowerCase() +"%", "%"+zakljucena.toLowerCase()+"%").fetch();
+		String mode = "edit";
+		renderTemplate("PoslovneGodine/show.html", poslovneGodine, mode);
 	
-	}
+	}*/
 
 }

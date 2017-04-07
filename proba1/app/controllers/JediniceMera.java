@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Drzava;
+import models.GrupaRobe;
 import models.JedinicaMere;
 import models.PoslovnaGodina;
 import play.data.validation.Required;
@@ -44,11 +45,13 @@ public class JediniceMera extends Controller {
     	}
     		show("edit");
     }
-    public static void filter() {
-		/*List<Drzava> drzave = Drzava.find("byNazivLikeAndOznakaLike", "%"+naziv+"%", "%"+oznaka+"%").fetch();
-		String mode = "edit";
-		renderTemplate("Drzave/show.html", drzave, mode);*/
-	}
+    public static void filter(@Required String nazivJedMere) {
+		
+    	List<JedinicaMere> jediniceMera = JedinicaMere.find("byNazivJedMereLike","%"+ nazivJedMere.toLowerCase() +"%").fetch();
+    	String mode = "edit";
+    	renderTemplate("JediniceMera/show.html", jediniceMera, mode);
+    	
+    	}
     
     public static void remove (Long id){
     	JedinicaMere jedinicaMere = JedinicaMere.findById(id);

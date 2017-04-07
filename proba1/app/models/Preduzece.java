@@ -19,25 +19,23 @@ public class Preduzece extends Model {
 		public String naziv;
 		@Column(nullable = false)
 		public String PIB;
-<<<<<<< HEAD
-=======
+		
+		
+		@OneToMany (mappedBy ="preduzece")
+		public List<GrupaRobe> grupeRoba;
 		
 		@ManyToOne
 		public Radnik radnik;
 		
+    	@ManyToOne
+		public NaseljenoMesto naseljenoMesto;
+    	
+    	@OneToMany (mappedBy ="preduzece")
+    	public List<PoslovniPartner> poslovniPartneri;
+    	
+    	@OneToMany (mappedBy = "preduzece")
+    	public List<Magacin> magacini;
 		
 		
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
-		public Preduzece(String adresa, String naziv, String pib) {
-			super();
-			this.adresa = adresa;
-			this.naziv = naziv;
-			this.PIB = pib;
-		}
-<<<<<<< HEAD
 		
-		@OneToMany (mappedBy ="preduzece")
-		public List<GrupaRobe> grupeRoba;
-=======
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 }

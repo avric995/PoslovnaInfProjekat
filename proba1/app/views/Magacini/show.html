@@ -2,8 +2,6 @@
 #{set title:'Magacini' /}
 
 <script>
-<<<<<<< HEAD
-=======
 $(document).ready(function(){
 	$("#radnikPickup").click(function(){
 		id = $(".highlighted").find(".id").html();
@@ -11,7 +9,14 @@ $(document).ready(function(){
 		$('#radniciModal').modal('toggle');
 	});
 });
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+
+$(document).ready(function(){
+	$("#preduzecePickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#preduzeceModal').modal('toggle');
+	});
+});
 
 function sync(item){
 	naziv = item.find(".naziv").html()
@@ -36,7 +41,7 @@ function nextform(id){
 #{secure.check "administrator"}
 <p>
 <ul>
-  <li><a href="@{Magacini.show("search")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
+  <li><a href="@{Magacini.show("filter")}"id="search"><img src="@{'/public/images/search.gif'}"/></a></li>
   <li><a href="#" id = "refresh"><img src="@{'/public/images/refresh.gif'}"/></a></li>
   <li><a href="#" id = "pickup"><img src="@{'/public/images/zoom-pickup.gif'}"/></a></li>
   <li><a href="#" id = "help"><img src="@{'/public/images/help.gif'}"/></a></li>
@@ -57,37 +62,32 @@ function nextform(id){
 <table>
 	<tr class = "header">
 	   <th>Name</th>
-<<<<<<< HEAD
-=======
-	   <th>Radnik</th>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+	   <th>Preduzece</th>
 	</tr>
 #{list items:magacini, as:'magacin'}
 	<tr>
 		<td class = "name">${magacin.naziv}</td>
-<<<<<<< HEAD
-=======
-		<td class = "radnik">${magacin.radnik}</td>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+		<td class = "preduzece">${magacin.preduzece.naziv}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${magacin.id}</td>
 	</tr>
 #{/list}
 </table>
 
+ #{set 'action'}
+	#{if mode == 'add'}
+	@{Magacini.create()}
+	#{/if}
+	#{elseif mode == 'edit'}
+	@{Magacini.edit()}
+	#{/elseif}
+	#{else}
+	@{Magacini.filter()}
+	#{/else}
+	#{/set}
+
 <div class = "panel">
 	<p>
 	
-				 #{set 'action'}
-				 #{if mode == 'add'}
-				 @{Magacini.create()}
-				 #{/if}
-				 #{elseif mode == 'edit'}
-				 @{Magacini.edit()}
-				 #{/elseif}
-				 #{else}
-				 @{Magacini.filter()}
-				 #{/else}
-				 #{/set}
 		<form action=${action} method="post">
 
 		
@@ -102,39 +102,31 @@ function nextform(id){
 					<input type = "text" name = "${field.name}" id = "${field.id}"/>
 				#{/}
 				</p>
-<<<<<<< HEAD
-				<div id = "formActions">
-					<input type = "submit" value = "Confirm" style="margin-left:6em"/>
-					<a href = "@{Magacini.show("edit")}" style="margin-left:1em">Rollback</a>
-=======
 				<p>
-				#{field 'radnik'}
-					<label for = "${field.id}">Radnik</label>
+				#{field 'preduzece'}
+					<label for = "${field.id}">Preduzece</label>
 					<select name = "${field.name}" id = "${field.id}"/>
-					#{list items:radnici, as:'radnik'}
-					<option value = "radnik.id">${radnik.ime}</option>
+					#{list items:preduzeca, as:'preduzece'}
+					<option value = "${preduzece.id}">${preduzece.naziv}</option>
 					#{/list}
 					</select>
 					
-					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#drzaveModal">...	</button>
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#preduzecaModal">...	</button>
 				#{/}
 				</p>
 				<div id = "formActions">
 					<input type = "submit" value = "Confirm" style="margin-left:6em"/>
 					<a href = "@{Magacini.show("")}" style="margin-left:1em">Rollback</a>
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 				</div>			
 				</form>
 		
 	</p>
 </div>
 
-<<<<<<< HEAD
-=======
 <!-- Modal -->
-  <div class="modal fade" id="radniciModal" role="dialog">
+ <!--  <div class="modal fade" id="radniciModal" role="dialog">
     <div class="modal-dialog">
-      <!-- Modal content-->
+      Modal content
       <div class="modal-content">
       <div class="modal-header">
       	Radnici
@@ -160,6 +152,42 @@ function nextform(id){
       </div>
     </div>
    </div>
+</div>  -->
+
+<!-- Modal2  -->
+  <div class="modal fade" id="preduzecaModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Preduzeca
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		    <th>Naziv</th> 
+	   		<th>PIB</th>
+	   		<th>Adresa</th>
+	   		<th>Naseljeno Mesto</th>
+		</tr>
+		#{list items:preduzeca, as:'preduzece'}
+		<tr>
+			<td class = "naziv">${preduzece.naziv}</td>
+			<td class = "PIB">${preduzece.PIB}</td>
+			<td class = "adresa">${preduzece.adresa}</td>
+			<td class = "naseljenoMesto">${preduzece.naseljenoMesto.naziv}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${preduzece.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "preduzecePickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
 </div>
 
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+
+

@@ -2,6 +2,21 @@
 #{set title:'PoslovniPartneri' /}
 
 <script>
+$(document).ready(function(){
+	$("#preduzecePickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#preduzeceModal').modal('toggle');
+	});
+});
+
+$(document).ready(function(){
+	$("#naseljenoMestoPickup").click(function(){
+		id = $(".highlighted").find(".id").html();
+		$("select").val(id);
+		$('#naseljenaMestaModal').modal('toggle');
+	});
+});
 
 function sync(item){
 	tipPartnera = item.find(".tipPartnera").html()
@@ -46,7 +61,7 @@ function remove(id){
 </ul>
 </p>
 
-
+<div class = "container-fluid">
 <h1>PoslovniPartneri</h1>
 
 <table>
@@ -55,6 +70,8 @@ function remove(id){
 	   <th>nazivPartnera</th>
 	   <th>pib</th>
 	   <th>adresa</th>
+	   <th>Preduzece</th>
+	   <th>Mesto</th>
 	</tr>
 #{list items:poslovniPartneri, as:'poslovniPartner'}
 	<tr>
@@ -62,6 +79,8 @@ function remove(id){
 		<td class = "nazivPartnera">${poslovniPartner.nazivPartnera}</td>
 		<td class = "pib">${poslovniPartner.pib}</td>
 		<td class = "adresa">${poslovniPartner.adresa}</td>
+		<td class = "preduzece">${poslovniPartner.preduzece.naziv}</td>
+		<td class = "mesto">${poslovniPartner.naseljenoMesto.naziv}</td>
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${poslovniPartner.id}</td>
 	</tr>
 #{/list}
@@ -124,6 +143,30 @@ function remove(id){
 					<span>#{error 'adresa' /}</span>
 				#{/}
 				</p>
+				<p>
+				#{field 'preduzece'}
+					<label for = "${field.id}">Preduzece</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:preduzeca, as:'preduzece'}
+					<option value = "${preduzece.id}">${preduzece.naziv}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#preduzecaModal">...	</button>
+				#{/}
+				</p>
+				<p>
+				#{field 'naseljenoMesto'}
+					<label for = "${field.id}">Naseljeno mesto</label>
+					<select name = "${field.name}" id = "${field.id}"/>
+					#{list items:naseljenaMesta, as:'naseljenoMesto'}
+					<option value = "${naseljenoMesto.id}">${naseljenoMesto.naziv}</option>
+					#{/list}
+					</select>
+					
+					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#naseljenaMestaModal">...	</button>
+				#{/}
+				</p>
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
 					<a href = "@{PoslovniPartneri.show("")}" style="margin-left:1em">Rollback</a>
@@ -132,4 +175,74 @@ function remove(id){
 		
 	</p>
 </div>
+
+<!-- Modal  -->
+  <div class="modal fade" id="preduzecaModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Preduzeca
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		    <th>Naziv</th> 
+	   		<th>PIB</th>
+	   		<th>Adresa</th>
+	   		<th>Naseljeno Mesto</th>
+		</tr>
+		#{list items:preduzeca, as:'preduzece'}
+		<tr>
+			<td class = "naziv">${preduzece.naziv}</td>
+			<td class = "PIB">${preduzece.PIB}</td>
+			<td class = "adresaP">${preduzece.adresa}</td>
+			<td class = "naseljenoMesto">${preduzece.naseljenoMesto.naziv}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${preduzece.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "preduzecePickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+<!-- Modal2 -->
+  <div class="modal fade" id="naseljenaMestaModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="modal-header">
+      	Naseljena mesta
+      </div>
+      <div class="modal-body">
+	    <table style = "padding:2em">
+		<tr class = "header">
+		   <th>Naziv</th>
+		   <th>Oznaka</th>
+		   <th>Postanski Broj</th>
+		</tr>
+		#{list items:naseljenaMesta, as:'naseljenoMesto'}
+		<tr>
+			<td class = "naziv">${naseljenoMesto.naziv}</td>
+			<td class = "oznaka">${naseljenoMesto.oznaka}</td>
+			<td class = "postanskiBroj">${naseljenoMesto.postanskiBroj}</td>
+			<td style = "visibility: hidden; max-width: 0px" class = "id">${naseljenoMesto.id}</td>
+		</tr>
+		#{/list}
+		</table>
+		<div class="modal-footer">
+			<input id = "naseljenoMestoPickup" type = "button" value = "izbor"/>
+		</div>
+		</div>
+      </div>
+    </div>
+   </div>
+</div>
+
+
 

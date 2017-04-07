@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Drzava;
+import models.Magacin;
 import models.NaseljenoMesto;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -57,7 +58,12 @@ public class NaseljenaMesta extends Controller{
 		show("");
 	}	
 
-	public static void filter() {
+	public static void filter(String naziv, String oznaka, String postanskiBroj, long drzava){
+		
+		List<NaseljenoMesto> naseljenaMesta = NaseljenoMesto.find("byNazivLikeAndOznakaLikeAndPostanskiBrojLikeAndDrzava_id","%"+ naziv.toLowerCase() +"%", "%"+oznaka.toLowerCase()+"%","%"+postanskiBroj.toLowerCase()+"%", drzava).fetch();
+		List<Drzava> drzave = Drzava.findAll();
+		String mode = "edit";
+		renderTemplate("NaseljenaMesta/show.html", naseljenaMesta,drzave, mode);
 	
 	}
 

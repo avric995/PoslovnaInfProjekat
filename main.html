@@ -9,10 +9,10 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     	<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     	#{get 'moreScripts' /}
-       
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
     <body>
-        
+
         <nav class="navbar navbar-inverse">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -21,15 +21,12 @@
             <ul class="nav navbar-nav">
               <li class="active"><a href="../../">Home</a></li>
               <li><a href="../Magacini/show">Magacini</a></li>
-              <li><a href="../NaseljenaMesta/show">Mesta</a></li>
+              <li><a href="../Artikli/show">Artikli</a></li>
               <li><a href="../Preduzeca/show">Preduzeca</a></li>
-              <li><a href="../Drzave/show">Drzave</a></li>
+              <li><a href="../Radnici/show">Radnici</a></li>
               <li><a href="../PoslovniPartneri/show">Poslovni partneri</a></li>
               <li><a href="../AnalitikeMagKartica/show">Analitika</a></li>
-              <li><a href="../PrometniDokumenti/show">Prometni dokumenti</a></li>
               <li><a href="../StavkeDokumenata/show">Stavke</a></li>
-              <li><a href="../GrupeRoba/show">Grupe roba</a></li>
-               <li><a href="../Robe/show">Robe</a></li>
               <li><a href="../RobneKartice/show">Robne kartice</a></li>
               <li><a href="../PoslovneGodine/show">Godine</a></li>
               <li><a href="../JediniceMera/show">Jedinice</a></li>
@@ -40,8 +37,8 @@
             </ul>
           </div>
         </nav>
-       
         #{doLayout /}
+        
         
     </body>
 </html>

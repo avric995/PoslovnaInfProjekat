@@ -3,7 +3,6 @@
 
 <script>
 
-<<<<<<< HEAD
 $(document).ready(function(){
 	$("#preduzecePickup").click(function(){
 		id = $(".highlighted").find(".id").html();
@@ -12,8 +11,6 @@ $(document).ready(function(){
 	});
 });
 
-=======
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 function sync(item){
 	nazivGrupe = item.find(".nazivGrupe").html()
     id = item.find(".id").html()
@@ -57,22 +54,15 @@ function remove(id){
 
 <table>
 	<tr class = "header">
-<<<<<<< HEAD
 	   <th>Naziv grupe</th>
 	   <th>Preduzece </th> 
-=======
-	   <th>Naziv grupe</th> 
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 	  
 	   
 	</tr>
 #{list items:grupeRoba, as:'grupaRobe'}
 	<tr>
 		<td class = "nazivGrupe">${grupaRobe.nazivGrupe}</td>
-<<<<<<< HEAD
-		<td class = "preduzece">${grupaRobe.preduzece}</td>
-=======
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
+		<td class = "preduzece">${grupaRobe.preduzece.naziv}</td>
 		
 		
 		<td style = "visibility: hidden; max-width: 0px" class = "id">${grupaRobe.id}</td>
@@ -116,7 +106,6 @@ function remove(id){
 					
 				#{/}
 				</p>
-<<<<<<< HEAD
 				<p>
 				#{field 'preduzece'}
 					<label for = "${field.id}">Preduzece</label>
@@ -129,9 +118,6 @@ function remove(id){
 					 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#preduzecaModal">...	</button>
 				#{/}
 				</p>
-=======
-			
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
 				
 				<div id = "formActions">
 					<input type = "submit" value = "Potvrda" style="margin-left:6em"/>
@@ -141,7 +127,6 @@ function remove(id){
 		
 	</p>
 </div>
-<<<<<<< HEAD
 <!-- Modal -->
   <div class="modal fade" id="preduzecaModal" role="dialog">
     <div class="modal-dialog">
@@ -170,6 +155,3 @@ function remove(id){
     </div>
    </div>
 </div>
-=======
-
->>>>>>> 41960a067b6d58f5af7102db222a6e644a797573
