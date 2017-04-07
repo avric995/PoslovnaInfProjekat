@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="robnaKartica" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dd6b1ff4-1e8e-4c2c-abe3-180223e49b67">
+	<property name="ireport.zoom" value="1.1000000000000045"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     RobnaKartica."cena" AS RobnaKartica_cena,
+     RobnaKartica."prometIzlazaKolicine" AS RobnaKartica_prometIzlazaKolicine,
+     RobnaKartica."prometIzlazaVrednosti" AS RobnaKartica_prometIzlazaVrednosti,
+     RobnaKartica."prometUlazaKolicine" AS RobnaKartica_prometUlazaKolicine,
+     RobnaKartica."prometUlazaVrednosti" AS RobnaKartica_prometUlazaVrednosti,
+     RobnaKartica."ukupnaVrednost" AS RobnaKartica_ukupnaVrednost,
+     AnalitikaMagKartice."smer" AS AnalitikaMagKartice_smer,
+     Roba."nazivRobe" AS Roba_nazivRobe,
+     PoslovniPartner."nazivPartnera" AS PoslovniPartner_nazivPartnera,
+     Magacin."naziv" AS Magacin_naziv
+FROM
+     "dbo"."RobnaKartica" RobnaKartica INNER JOIN "dbo"."AnalitikaMagKartice" AnalitikaMagKartice ON RobnaKartica."id" = AnalitikaMagKartice."robnaKartica_id"
+     INNER JOIN "dbo"."Roba" Roba ON RobnaKartica."roba_id" = Roba."id"
+     INNER JOIN "dbo"."Magacin" Magacin ON RobnaKartica."magacin_id" = Magacin."id",
+     "dbo"."PoslovniPartner" PoslovniPartner]]>
+	</queryString>
+	<field name="RobnaKartica_cena" class="java.lang.Double"/>
+	<field name="RobnaKartica_prometIzlazaKolicine" class="java.lang.Integer"/>
+	<field name="RobnaKartica_prometIzlazaVrednosti" class="java.lang.Integer"/>
+	<field name="RobnaKartica_prometUlazaKolicine" class="java.lang.Integer"/>
+	<field name="RobnaKartica_prometUlazaVrednosti" class="java.lang.Integer"/>
+	<field name="RobnaKartica_ukupnaVrednost" class="java.lang.Double"/>
+	<field name="AnalitikaMagKartice_smer" class="java.lang.String"/>
+	<field name="Roba_nazivRobe" class="java.lang.String"/>
+	<field name="PoslovniPartner_nazivPartnera" class="java.lang.String"/>
+	<field name="Magacin_naziv" class="java.lang.String"/>
+	<variable name="ukupnaVrednost" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{RobnaKartica_ukupnaVrednost}]]></variableExpression>
+	</variable>
+	<variable name="ukupnaVrIzlaza" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{RobnaKartica_prometIzlazaVrednosti}]]></variableExpression>
+	</variable>
+	<variable name="ukupnaVrUlaza" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{RobnaKartica_prometUlazaVrednosti}]]></variableExpression>
+	</variable>
+	<variable name="ukupnaCena" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{RobnaKartica_cena}]]></variableExpression>
+	</variable>
+	<variable name="ukupanIzlaz" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{RobnaKartica_prometIzlazaKolicine}]]></variableExpression>
+	</variable>
+	<variable name="ukupanUlaz" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{RobnaKartica_prometUlazaKolicine}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<textField>
+				<reportElement x="538" y="0" width="17" height="20" uuid="e1ac63b2-a8af-4a13-8758-d265f91fdf73"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="493" y="0" width="45" height="20" uuid="6e27645f-067a-4178-89cf-5b6fb80173f1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Strana:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="20" width="38" height="20" uuid="2f5c77a0-41d0-4579-8810-caf409a62d5a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datum:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="493" y="20" width="62" height="20" uuid="69b0e846-526d-4cd8-b0b2-2bc50b934ffd"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="207" y="20" width="154" height="20" uuid="20f372d3-1082-4ce4-9515-2d63d0b20481"/>
+				<textElement textAlignment="Justified">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ROBNA KARTICA U PERIODU:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="63" height="20" uuid="51a9790d-5f8c-495a-80ba-b96eccaba7f3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SKLADISTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="52" width="66" height="20" uuid="877a82dc-6baa-4285-95a2-6bc44373d778"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOBAVLJAC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="383" y="52" width="100" height="20" uuid="8d482964-730c-4b9f-a7ea-455d32b8f8b3"/>
+				<textFieldExpression><![CDATA[$F{PoslovniPartner_nazivPartnera}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="20" width="100" height="20" uuid="dd7b697d-4069-482d-afdc-176b29c5417f"/>
+				<textFieldExpression><![CDATA[$F{Magacin_naziv}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="6bb9d7d8-456b-4d5d-aca0-956f14f7a6d7"/>
+			</line>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="01b98493-9bf4-4613-9923-c2e8d266522d"/>
+			</line>
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="22d6b405-9655-47ac-824e-dcb077415e7b"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1" width="50" height="20" uuid="6becb132-6398-4bb0-9c6f-a38f2097a160"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datum]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="0" width="52" height="20" uuid="f09823c0-59b0-4eea-9efa-57698c7bfed1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Roba]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="0" width="26" height="20" uuid="c80e4ad8-56b6-4d34-b25e-39f772cfc167"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sm.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="151" y="1" width="56" height="20" uuid="834a4914-de1c-448c-9dfd-4f37a78a2836"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ulaz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="0" width="54" height="20" uuid="d3a603ae-883d-4e5e-8250-f0866b3cd5a4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Izlaz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="0" width="56" height="20" uuid="d88e4745-9ce8-41b9-97b9-239572672275"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Saldo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="0" width="39" height="20" uuid="660edf01-6551-4b7b-ae58-e0ab7cd09673"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cena]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="356" y="0" width="72" height="20" uuid="0104b752-f6a0-4784-a8fe-be70db790a37"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vr. ulaza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="0" width="55" height="20" uuid="e77112b8-e158-474c-a2c9-280340d55662"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vr. izlaza]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="0" width="72" height="20" uuid="bee29845-58bb-46f5-bf1d-9a1c9ed223ec"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uk. vrednost]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="317" y="22" width="39" height="20" uuid="9c7353f1-1f56-4372-9cd3-a50178f97756"/>
+				<textFieldExpression><![CDATA[$F{RobnaKartica_cena}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="22" width="54" height="20" uuid="76bb1d3d-58d9-47a2-9242-07b780588e2f"/>
+				<textFieldExpression><![CDATA[$F{RobnaKartica_prometIzlazaKolicine}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="22" width="56" height="20" uuid="ff573855-4408-4407-b588-06e053f16278"/>
+				<textFieldExpression><![CDATA[$F{RobnaKartica_prometUlazaKolicine}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="22" width="26" height="20" uuid="21b6ec48-f9e6-41bd-80bd-52f7708e6242"/>
+				<textFieldExpression><![CDATA[$F{AnalitikaMagKartice_smer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="22" width="73" height="20" uuid="35384d77-a4e6-4c02-b0ad-13700a88c853"/>
+				<textFieldExpression><![CDATA[$F{RobnaKartica_prometUlazaVrednosti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="22" width="55" height="20" uuid="6a521e71-ecfe-4ae0-b399-d93440ef34e9"/>
+				<textFieldExpression><![CDATA[$F{RobnaKartica_prometIzlazaVrednosti}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="22" width="72" height="20" uuid="364b269f-822c-49a4-a92c-7b2959589f3e"/>
+				<textFieldExpression><![CDATA[$F{RobnaKartica_ukupnaVrednost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="22" width="52" height="20" uuid="910846ec-403f-4e52-9420-6746e75183fe"/>
+				<textFieldExpression><![CDATA[$F{Roba_nazivRobe}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="20" uuid="942bf381-7e62-4aff-a332-851d991672b7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ukupno:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="483" y="2" width="72" height="20" uuid="3cb72f56-1dd6-42c8-982e-60f701685cd9"/>
+				<textFieldExpression><![CDATA[$V{ukupnaVrednost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="428" y="2" width="55" height="20" uuid="6ef434c1-bf7e-4495-8dd5-84451d172227"/>
+				<textFieldExpression><![CDATA[$V{ukupnaVrIzlaza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="356" y="2" width="72" height="20" uuid="5d467afb-497d-4eee-baf1-7d9a0899ca9f"/>
+				<textFieldExpression><![CDATA[$V{ukupnaVrUlaza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="2" width="38" height="20" uuid="573f43f0-de55-4bb1-8e41-41a221719aa8"/>
+				<textFieldExpression><![CDATA[$V{ukupnaCena}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="207" y="2" width="54" height="20" uuid="6c4e3614-edb4-4324-ae38-e0605aeee2bb"/>
+				<textFieldExpression><![CDATA[$V{ukupanIzlaz}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="151" y="2" width="56" height="20" uuid="6682d130-6668-4459-8743-1a7a637f929f"/>
+				<textFieldExpression><![CDATA[$V{ukupanUlaz}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
